@@ -152,7 +152,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                   Download Resume
                 </button>
                 <a
-                  href="src/components/images/resume.pdf"
+                  href="https://drive.google.com/file/d/1-k3JxNweO7lhsx7TKamX-Pr-d8VrT9Mj/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`w-full flex items-center justify-center gap-2 px-6 py-3 mt-3 border-2 
