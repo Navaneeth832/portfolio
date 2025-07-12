@@ -58,7 +58,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
   const downloadResume = () => {
     // In a real application, this would download the actual resume
     const link = document.createElement('a');
-    link.href = "src/components/images/resume.pdf";
+    link.href = "https://drive.google.com/uc?export=download&id=1-k3JxNweO7lhsx7TKamX-Pr-d8VrT9Mj";
     link.download = 'Navaneeth_Resume.pdf';
     link.click();
   };
