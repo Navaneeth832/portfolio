@@ -34,7 +34,9 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
         },
         body: JSON.stringify(formData),
       });
-  
+      if (!response.ok) {
+        throw new Error("Server is sleeping, please try again later.");
+      }
       const result = await response.json();
   
       if (result.success) {
