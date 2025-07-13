@@ -30,7 +30,7 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
 
   return (
     <section id="home" className={`min-h-screen flex items-center justify-center relative overflow-hidden ${
-      darkMode ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-teal-50'
+      darkMode ? 'bg-gradient-to-br from-gray-950 via-[#2b1e1e] to-violet-1000' : 'bg-gradient-to-br from-blue-50 via-white to-teal-50'
     }`}>
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
