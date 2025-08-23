@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Hackathons from './components/Hackathons';
 import Skills from './components/Skills';
@@ -58,6 +59,7 @@ function App() {
       <main>
         <Hero darkMode={darkMode} />
         <About darkMode={darkMode} />
+        <Experience darkMode={darkMode} />
         <Projects darkMode={darkMode} />
         <Hackathons darkMode={darkMode} />
         <Skills darkMode={darkMode} />

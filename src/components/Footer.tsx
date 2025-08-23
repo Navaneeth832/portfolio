@@ -35,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               Quick Links
             </h4>
             <div className="flex flex-wrap justify-center gap-4">
-              {['About', 'Projects', 'Skills', 'Contact'].map((link) => (
+              {['About', 'Experience', 'Projects', 'Skills', 'Contact'].map((link) => (
                 <button
                   key={link}
                   onClick={() => document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })}
