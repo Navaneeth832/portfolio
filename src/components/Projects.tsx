@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Github, Zap, Database, TrendingUp, Terminal, Film, Bot } from 'lucide-react';
+import { ExternalLink, Github, Zap, Database, TrendingUp, Terminal, Film, Bot, Paperclip } from 'lucide-react';
 
 interface ProjectsProps {
   darkMode: boolean;
@@ -8,13 +8,21 @@ interface ProjectsProps {
 const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
   const projects = [
     {
-      title: "EV Travel Assistant",
-      description: "A comprehensive hackathon project helping electric vehicle owners plan optimal routes with charging station locations, real-time availability, and trip optimization.",
-      tech: ["React", "Node.js", "Maps API"],
-      icon: <Zap className="text-green-500" size={24} />,
-      github: "https://github.com/Navaneeth832/EV-Trip-Planner",
-      live: "https://ev-trip-planner.onrender.com/",
-      image: "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "KTU-grade-analysis",
+      description: "A full-stack web application designed to help students analyze their academic performance by parsing PDF grade sheets, providing detailed CGPA/SGPA analysis, and allowing for AI-powered custom queries on their academic data.",
+      tech: [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Recharts",
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Google Gemini API"
+      ],
+      icon: <Paperclip className="text-green-500" size={24} />,
+      github: "https://github.com/Navaneeth832/KTU-grade-analysis",
+      image: "https://cdn.potomac.edu/wp-content/uploads/2022/09/how-to-get-good-grades-in-college.jpg",
       category: "Gemini Hackathon"
     },
     {
@@ -53,6 +61,16 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
       github: "https://github.com/Navaneeth832/PlaceProAI",
       image: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600",
       category: "Web App"
+    },
+    {
+      title: "EV Travel Assistant",
+      description: "A comprehensive hackathon project helping electric vehicle owners plan optimal routes with charging station locations, real-time availability, and trip optimization.",
+      tech: ["React", "Node.js", "Maps API"],
+      icon: <Zap className="text-green-500" size={24} />,
+      github: "https://github.com/Navaneeth832/EV-Trip-Planner",
+      live: "https://ev-trip-planner.onrender.com/",
+      image: "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=600",
+      category: "Gemini Hackathon"
     }
   ];
 
