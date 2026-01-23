@@ -58,7 +58,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
   const downloadResume = () => {
     // In a real application, this would download the actual resume
     const link = document.createElement('a');
-    link.href = "https://drive.google.com/uc?export=download&id=1-k3JxNweO7lhsx7TKamX-Pr-d8VrT9Mj";
+    link.href = "https://drive.google.com/file/d/1zyJa3iAcgS1YOUpPW0l8WMTdG-WKpZSK/view?usp=sharing";
     link.download = 'Navaneeth_Resume.pdf';
     link.click();
   };
@@ -152,7 +152,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                   Download Resume
                 </button>
                 <a
-                  href="https://drive.google.com/file/d/1-k3JxNweO7lhsx7TKamX-Pr-d8VrT9Mj/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1zyJa3iAcgS1YOUpPW0l8WMTdG-WKpZSK/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`w-full flex items-center justify-center gap-2 px-6 py-3 mt-3 border-2 

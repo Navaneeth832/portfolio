@@ -8,22 +8,6 @@ interface ExperienceProps {
 const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
   const experiences = [
     {
-      title: "DL Research and Development Intern",
-      company: "DiceMed",
-      location: "Remote",
-      period: "Aug 2025 – Jan 2026",
-      type: "Internship",
-      description: "Focused on deep learning research and development in medical imaging applications.",
-      responsibilities: [
-        "Built foundation in deep learning frameworks (TensorFlow, PyTorch) through applied projects and coursework",
-        "Enhanced DiceMed's website design to improve user experience and accessibility",
-        "Annotated 2D/3D medical imaging datasets using tools like 3D Slicer, ITK-SNAP, CVAT, and LabelImg",
-        "Collaborated with research team to analyze deep learning architectures and co-author journal publications"
-      ],
-      tech: ["TensorFlow", "PyTorch", "3D Slicer", "ITK-SNAP", "CVAT", "LabelImg"],
-      color: "from-purple-600 to-pink-600"
-    },
-    {
       title: "Web Developer",
       company: "Internship Cell, CET",
       location: "Remote",
