@@ -13,13 +13,12 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors({
   origin: [
-    'http://localhost:5173',  // Vite dev server
-    'http://localhost:4173',  // Vite preview
+    'http://localhost:5173',
+    'http://localhost:4173',
     'http://127.0.0.1:5173',
-    '*',
+    'https://navaneeth832.github.io',
   ],
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
 }));
 
 // ── Health check ────────────────────────────────────────────────────────────
