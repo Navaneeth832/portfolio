@@ -1,127 +1,124 @@
-import React, { useEffect, useState } from 'react';
-import { ChevronDown, MapPin, GraduationCap } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Download, MapPin } from 'lucide-react';
 
 interface HeroProps {
   darkMode: boolean;
 }
 
 const Hero: React.FC<HeroProps> = ({ darkMode }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [textIndex, setTextIndex] = useState(0);
-
-  const rotatingTexts = [
-    'CSE Student',
-    'Hackathon Enthusiast', 
-    'Full-Stack Developer',
-    'Problem Solver'
-  ];
-
-  useEffect(() => {
-    setIsVisible(true);
-    const interval = setInterval(() => {
-      setTextIndex((prev) => (prev + 1) % rotatingTexts.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offsetPosition = element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
   };
 
+  const coreTech = ['Python', 'FastAPI', 'React', 'Flutter', 'Gemini API', 'PostgreSQL'];
+
+  const base = darkMode ? 'text-slate-100' : 'text-slate-900';
+  const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
+  const border = darkMode ? 'border-slate-800' : 'border-slate-200';
+
   return (
-    <section id="home" className={`min-h-screen flex items-center justify-center relative overflow-hidden ${
-      darkMode ? 'bg-gradient-to-br from-gray-950 via-[#2b1e1e] to-violet-1000' : 'bg-gradient-to-br from-blue-50 via-white to-teal-50'
-    }`}>
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, #3B82F6 0%, transparent 50%), 
-                           radial-gradient(circle at 75% 75%, #14B8A6 0%, transparent 50%)`
-        }} />
+    <section
+      id="home"
+      className={`relative min-h-screen flex flex-col justify-center pt-20 pb-20 overflow-hidden bg-grid-pattern ${
+        darkMode ? 'bg-slate-950' : 'bg-slate-50'
+      }`}
+    >
+      {/* Subtle ambient glow — very low opacity */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full"
+          style={{
+            background: darkMode
+              ? 'radial-gradient(ellipse, rgba(99,102,241,0.07) 0%, transparent 70%)'
+              : 'radial-gradient(ellipse, rgba(99,102,241,0.05) 0%, transparent 70%)',
+          }}
+        />
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          {/* Profile Image */}
-                {/* <div className="mb-8">
-                <div className="w-48 h-48 mx-auto rounded-full overflow-hidden shadow-2xl ring-4 ring-blue-500/20 hover:scale-105 transition-transform duration-300">
-                  <img 
-                  src=""
-                  alt="Navaneeth - Computer Science Student"
-                  className="w-full h-full object-cover"
-                  />
-                </div>
-                </div> */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="max-w-3xl">
 
-                {/* Name */}
-          <h1 className={`text-5xl md:text-7xl font-bold mb-4 ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}>
-            <span className="bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">
-              Navaneeth Krishna G
-            </span>
+          {/* Location badge */}
+          <div className={`inline-flex items-center gap-1.5 text-xs ${muted} mb-8`}>
+            <MapPin size={13} />
+            <span>Trivandrum, Kerala · Open to opportunities</span>
+          </div>
+
+          {/* Name */}
+          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-3 ${base}`}>
+            Navaneeth Krishna G
           </h1>
 
-          {/* Location & Education */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <div className={`flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              <GraduationCap size={20} />
-              <span>BTech CSE, College Of Engineering Trivandrum</span>
-            </div>
-            <div className={`flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              <MapPin size={20} />
-              <span>Kerala, India</span>
-            </div>
-          </div>
+          {/* Role */}
+          <p className={`text-lg sm:text-xl font-medium mb-6 ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>
+            Software Developer · B.Tech CSE @ CET Trivandrum
+          </p>
 
-          {/* Rotating Tagline */}
-          <div className="h-16 flex items-center justify-center mb-8">
-            <p className={`text-xl md:text-2xl font-medium transition-all duration-500 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
-            }`}>
-              <span className="text-blue-600 font-semibold">
-                {rotatingTexts[textIndex]}
-              </span>
-            </p>
-          </div>
-
-          {/* Brief Description */}
-          <p className={`text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed ${
-            darkMode ? 'text-gray-400' : 'text-gray-600'
-          }`}>
-            Passionate about building innovative solutions through code. 
-            Specializing in full-stack development, machine learning, and open-source contributions.
+          {/* Description */}
+          <p className={`text-base sm:text-lg leading-relaxed max-w-2xl mb-10 ${muted}`}>
+            Computer Science undergraduate interested in backend systems, AI applications, and full-stack
+            development. Currently interning at{' '}
+            <span className={`font-medium ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+              SATCARD, IIT Palakkad
+            </span>
+            , building an agricultural market analytics platform. I enjoy working on problems that sit at
+            the intersection of software engineering and applied AI.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <button 
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full 
-                hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-200 shadow-lg"
+          <div className="flex flex-wrap items-center gap-3 mb-12">
+            <button
+              onClick={() => scrollToSection('projects')}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors duration-150"
             >
-              View My Work
+              View Projects
+              <ArrowRight size={15} />
             </button>
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className={`px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-full 
-                hover:bg-blue-600 hover:text-white transform hover:scale-105 transition-all duration-200 ${
-                darkMode ? 'hover:bg-blue-600' : ''
+            <a
+              href="https://drive.google.com/file/d/1zyJa3iAcgS1YOUpPW0l8WMTdG-WKpZSK/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-colors duration-150 ${
+                darkMode
+                  ? `${border} text-slate-300 hover:bg-slate-800 hover:text-white`
+                  : `${border} text-slate-700 hover:bg-slate-100 hover:text-slate-900`
               }`}
             >
-              Get In Touch
+              <Download size={15} />
+              Resume
+            </a>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ${
+                darkMode
+                  ? 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-500 hover:text-slate-800'
+              }`}
+            >
+              Contact
             </button>
           </div>
-        </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <button 
-            onClick={scrollToAbout}
-            className={`animate-bounce ${darkMode ? 'text-gray-400' : 'text-gray-600'} hover:text-blue-600 transition-colors`}
-          >
-            <ChevronDown size={32} />
-          </button>
+          {/* Core tech pills — 6 max */}
+          <div className="flex flex-wrap gap-2">
+            {coreTech.map((tech) => (
+              <span
+                key={tech}
+                className={`px-3 py-1 rounded-md text-xs font-mono border ${
+                  darkMode
+                    ? `${border} text-slate-400 bg-slate-900/60`
+                    : `${border} text-slate-600 bg-white`
+                }`}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

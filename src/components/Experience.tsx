@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, ExternalLink } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 interface ExperienceProps {
   darkMode: boolean;
@@ -8,170 +8,102 @@ interface ExperienceProps {
 const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
   const experiences = [
     {
-      title: "Web Developer",
-      company: "Internship Cell, CET",
-      location: "Remote",
-      period: "June 2025 – Present",
-      type: "Internship",
-      description: "Working on the official platform to improve student access to internships and career opportunities.",
-      responsibilities: [
-        "Working on the official platform to improve student access to internships",
-        "Using HTML, CSS, and Python to build and maintain internal web tools",
-        "Collaborating with team to enhance user experience and platform functionality"
+      title: 'Full Stack Developer, Intern',
+      company: 'SATCARD – IIT Palakkad',
+      period: 'May 2026 – Present',
+      location: 'IIT Palakkad, Kerala',
+      isCurrent: true,
+      points: [
+        'Building a full-stack agricultural market analytics platform with a FastAPI backend and Flutter frontend.',
+        'Implemented dynamic multi-level commodity filtering and interactive data visualizations using Riverpod for state management.',
+        'Designed PostgreSQL database schema with SQLAlchemy ORM to handle time-series market data efficiently.',
       ],
-      tech: ["HTML", "CSS", "Python", "Web Development"],
-      color: "from-blue-600 to-teal-600"
+      tech: ['FastAPI', 'Flutter', 'Riverpod', 'PostgreSQL', 'SQLAlchemy', 'Python'],
     },
     {
-      title: "Data Science Intern",
-      company: "Proxenix",
-      location: "Remote",
-      period: "June 2025 – July 2025",
-      type: "Internship",
-      description: "Assisted in data analysis and model development for business intelligence solutions.",
-      responsibilities: [
-        "Assisting in data analysis and model development using Python",
-        "Applying data science techniques for predictive insights and reports",
-        "Working with large datasets to extract meaningful business insights"
+      title: 'Data Science Intern',
+      company: 'Proxenix',
+      period: 'Jun 2025 – Jul 2025',
+      location: 'Remote',
+      isCurrent: false,
+      points: [
+        'Collaborated in a team of 5 to build and deploy a movie review sentiment analysis web app achieving 90% accuracy.',
+        'Built the FastAPI inference backend and integrated a React frontend for real-time predictions.',
+        'Used TF-IDF vectorization and Logistic Regression (scikit-learn) for the classification model.',
       ],
-      tech: ["Python", "Data Analysis", "Machine Learning", "Predictive Modeling"],
-      color: "from-green-600 to-blue-600"
-    }
+      tech: ['Python', 'FastAPI', 'React', 'TF-IDF', 'Logistic Regression', 'Scikit-Learn'],
+    },
   ];
 
+  const base = darkMode ? 'text-slate-100' : 'text-slate-900';
+  const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
+  const subtle = darkMode ? 'text-slate-300' : 'text-slate-600';
+  const border = darkMode ? 'border-slate-800' : 'border-slate-200';
+  const cardBg = darkMode ? 'bg-slate-900/60' : 'bg-white';
+
   return (
-    <section id="experience" className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
-      <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}>
-            Professional <span className="text-blue-600">Experience</span>
-          </h2>
-          <p className={`text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            My journey through various internships and roles, gaining hands-on experience in web development, 
-            data science, and deep learning research.
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto rounded-full mt-6"></div>
-        </div>
+    <section
+      id="experience"
+      className={`py-24 ${darkMode ? 'bg-slate-950' : 'bg-slate-50'}`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Experience Timeline */}
-        <div className="relative">
-          {/* Timeline Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-600 to-teal-600 rounded-full" />
-          
-          <div className="space-y-12">
-            {experiences.map((experience, index) => (
-              <div 
-                key={index}
-                className={`relative ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} 
-                  flex flex-col md:flex gap-8 items-center`}
-              >
-                {/* Timeline Dot */}
-                <div className="hidden md:block absolute left-1/2 top-8 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-white shadow-lg z-10" />
+        <p className="text-sm font-mono font-medium text-indigo-500 mb-3">Experience</p>
+        <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight mb-12 ${base}`}>
+          Work History
+        </h2>
 
-                {/* Content Card */}
-                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                  <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-2xl p-8 shadow-lg 
-                    hover:shadow-xl transition-all duration-300 hover:scale-105`}>
-                    
-                    {/* Header */}
-                    <div className="mb-6">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                            {experience.title}
-                          </h3>
-                          <p className={`text-lg font-semibold bg-gradient-to-r ${experience.color} bg-clip-text text-transparent`}>
-                            {experience.company}
-                          </p>
-                        </div>
-                        <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                          darkMode ? 'bg-blue-900/50 text-blue-300' : 'bg-blue-100 text-blue-800'
-                        }`}>
-                          {experience.type}
-                        </span>
-                      </div>
-
-                      {/* Meta Information */}
-                      <div className="flex flex-wrap gap-4 mb-4">
-                        <div className={`flex items-center gap-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          <Calendar size={16} />
-                          <span className="text-sm">{experience.period}</span>
-                        </div>
-                        <div className={`flex items-center gap-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          <MapPin size={16} />
-                          <span className="text-sm">{experience.location}</span>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-4 leading-relaxed`}>
-                        {experience.description}
-                      </p>
-                    </div>
-
-                    {/* Responsibilities */}
-                    <div className="mb-6">
-                      <h4 className={`font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        Key Responsibilities:
-                      </h4>
-                      <ul className="space-y-2">
-                        {experience.responsibilities.map((responsibility, respIndex) => (
-                          <li 
-                            key={respIndex}
-                            className={`flex items-start gap-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
-                          >
-                            <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
-                            <span>{responsibility}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Technologies */}
-                    <div>
-                      <h4 className={`font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                        Technologies & Tools:
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {experience.tech.map((tech, techIndex) => (
-                          <span 
-                            key={techIndex}
-                            className={`px-3 py-1 text-sm rounded-full ${
-                              darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'
-                            }`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+        <div className="max-w-3xl space-y-8">
+          {experiences.map((exp, idx) => (
+            <div
+              key={idx}
+              className={`p-6 rounded-xl border ${border} ${cardBg}`}
+            >
+              {/* Header */}
+              <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+                <div>
+                  <h3 className={`text-base font-semibold ${base}`}>{exp.title}</h3>
+                  <p className="text-sm text-indigo-500 font-medium mt-0.5">{exp.company}</p>
+                  <div className={`flex items-center gap-1 mt-1 text-xs ${muted}`}>
+                    <MapPin size={11} />
+                    {exp.location}
                   </div>
                 </div>
-
-                {/* Visual Element */}
-                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pl-8' : 'md:pr-8'}`}>
-                  <div className={`${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-2xl p-8 shadow-lg 
-                    hover:shadow-xl transition-all duration-300`}>
-                    <div className="flex items-center justify-center h-48">
-                      <div className={`text-center`}>
-                        <Briefcase className={`mx-auto mb-4 bg-gradient-to-r ${experience.color} bg-clip-text text-transparent`} size={48} />
-                        <h4 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                          {experience.company}
-                        </h4>
-                        <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                          {experience.period}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  {exp.isCurrent && (
+                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                      Current
+                    </span>
+                  )}
+                  <span className={`text-xs font-mono ${muted}`}>{exp.period}</span>
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* Impact points */}
+              <ul className={`space-y-2 mb-5 text-sm ${subtle}`}>
+                {exp.points.map((pt, pIdx) => (
+                  <li key={pIdx} className="flex items-start gap-2">
+                    <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-indigo-500" />
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech */}
+              <div className="flex flex-wrap gap-1.5">
+                {exp.tech.map((t) => (
+                  <span
+                    key={t}
+                    className={`px-2.5 py-1 rounded-md text-xs font-mono border ${border} ${muted}`}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );

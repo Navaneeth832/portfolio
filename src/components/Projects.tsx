@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Github, Zap, Database, TrendingUp, Terminal, Film, Bot, Paperclip } from 'lucide-react';
+import { ExternalLink, Github, FileCode, ShieldAlert, Activity } from 'lucide-react';
 
 interface ProjectsProps {
   darkMode: boolean;
@@ -8,170 +8,139 @@ interface ProjectsProps {
 const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
   const projects = [
     {
-      title: "KTU-grade-analysis",
-      description: "A full-stack web application designed to help students analyze their academic performance by parsing PDF grade sheets, providing detailed CGPA/SGPA analysis, and allowing for AI-powered custom queries on their academic data.",
-      tech: [
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Recharts",
-        "Python",
-        "FastAPI",
-        "PostgreSQL",
-        "Google Gemini API"
+      id: 'lab-record-studio',
+      title: 'Lab Record Studio',
+      description: 'AI tool that generates formatted lab records from PDFs, code snippets, or plain-text prompts.',
+      highlights: [
+        'Supports 3 input types and 2 LaTeX templates',
+        'Produces complete lab records in ~15 seconds',
+        'Exports PDF preview and Overleaf-compatible ZIP',
+        'Deployed on Render with a Next.js + FastAPI stack',
       ],
-      icon: <Paperclip className="text-green-500" size={24} />,
-      github: "https://github.com/Navaneeth832/KTU-grade-analysis",
-      image: "https://cdn.potomac.edu/wp-content/uploads/2022/09/how-to-get-good-grades-in-college.jpg",
-      category: "Gemini Hackathon"
+      tech: ['Next.js', 'FastAPI', 'Python', 'Gemini API', 'LaTeX'],
+      github: 'https://github.com/Navaneeth832/record_latex_generator',
+      live: 'https://record-latex-generator.onrender.com',
+      icon: <FileCode size={18} className="text-indigo-500" />,
     },
     {
-      title: "IPL-match-2nd-inns-prediction",
-      description: "This project uses an XGBoost model to predict the winner of an IPL match based on various features (city, venue, teams, toss decision, target runs, etc.). The prediction is served via a Flask web app with an interactive HTML form, allowing users to input match details and view the prediction result.",
-      tech: ["Firebase", "React", "Chart.js", "PWA"],
-      icon: <Database className="text-blue-500" size={24} />,
-      github: "https://github.com/Navaneeth832/IPL-match-2nd-inns-prediction",
-      image: "https://cdn.britannica.com/47/148847-050-C4FB5341/Cricket-bat-ball.jpg",
-      category: "Machine Learning"
+      id: 'sentinel-guard',
+      title: 'SentinelGuard AI',
+      description: 'Multi-modal fraud detection agent that analyzes text, audio, images, and documents.',
+      highlights: [
+        'Uses Gemini 2.5 reasoning + MCP servers for domain validation',
+        'Threat scoring triggers automated SMS/email alerts via Twilio & SendGrid',
+        'Dual-layer verification: LLM behavioral analysis + deterministic DB checks',
+        'Built with Google Cloud ADK and Vertex AI Agent Runtime',
+      ],
+      tech: ['Python', 'Gemini 2.5', 'MCP', 'MongoDB', 'Elasticsearch', 'React'],
+      github: 'https://github.com/Navaneeth832',
+      live: null,
+      icon: <ShieldAlert size={18} className="text-emerald-500" />,
     },
     {
-      title: "Blood donation manager",
-      description:"The Blood Donation Management System is a web-based application that helps hospitals and blood donors manage blood donation records efficiently. It allows donors to register, hospitals to request blood, and records to be maintained in a MySQL database.",
-      tech: ["HTML", "CSS", "JavaScript", "MySQL"],
-      icon: <TrendingUp className="text-purple-500" size={24} />,
-      github: "https://github.com/Navaneeth832/dbms-project",
-      image: "https://cdn.vectorstock.com/i/1000v/75/21/blood-donation-icon-vector-17947521.jpg",
-      category: "Database Management"
+      id: 'crash-detection-soc',
+      title: 'Crash Detection & SOC Dispatch',
+      description: 'Android app that detects vehicle crashes using on-device ML and notifies an operations dashboard.',
+      highlights: [
+        'Background sensor fusion (accelerometer + gyroscope) for high-G impact detection',
+        '1D CNN model via TensorFlow Lite, 3 risk tiers, 300 ms confirmation window',
+        'Real-time React SOC dashboard with Firebase and Google Maps routing',
+        'Automated hospital routing based on incident location and severity',
+      ],
+      tech: ['Kotlin', 'TensorFlow Lite', 'React', 'Firebase', 'Python', 'Google Maps API'],
+      github: 'https://github.com/Navaneeth832',
+      live: null,
+      icon: <Activity size={18} className="text-pink-500" />,
     },
-    {
-      title: "Movie sentimental Analyzer",
-      description: "A machine learning web app that classifies movie reviews as Positive or Negative based on sentiment. Built using FastAPI for backend and React+TypeScript for frontend.",
-      tech: ["FastApi", "React", "tailwindcss", "Scikit-learn","Python"],
-      icon: <Film className="text-black-500" size={24} />,
-      github: "https://github.com/Navaneeth832/Movie-sentimental-analysis",
-      live: "https://starlit-tartufo-83cb03.netlify.app/",
-      image: "https://plus.unsplash.com/premium_photo-1710409625244-e9ed7e98f67b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8",
-      category: "Web App"
-    },
-    {
-      title: "AI Career Guide Platform ( In Progress )",
-      description: "Building a web app using FastApi, ML, and Gemini API to predict placements and provide personalized career advice. Frontend with Bolt.new.",
-      tech: ["Node.js", "React", "FastApi", "Scikit-learn", "Gemini API"],
-      icon: <Bot className="text-yellow-500" size={24} />,
-      github: "https://github.com/Navaneeth832/PlaceProAI",
-      image: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600",
-      category: "Web App"
-    },
-    {
-      title: "EV Travel Assistant",
-      description: "A comprehensive hackathon project helping electric vehicle owners plan optimal routes with charging station locations, real-time availability, and trip optimization.",
-      tech: ["React", "Node.js", "Maps API"],
-      icon: <Zap className="text-green-500" size={24} />,
-      github: "https://github.com/Navaneeth832/EV-Trip-Planner",
-      live: "https://ev-trip-planner.onrender.com/",
-      image: "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=600",
-      category: "Gemini Hackathon"
-    }
   ];
 
-  return (
-    <section id="projects" className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
-      <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}>
-            Featured <span className="text-blue-600">Projects</span>
-          </h2>
-          <p className={`text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            Here are some of my recent projects that showcase my skills in full-stack development, 
-            machine learning, and problem-solving.
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto rounded-full mt-6"></div>
-        </div>
+  const base = darkMode ? 'text-slate-100' : 'text-slate-900';
+  const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
+  const subtle = darkMode ? 'text-slate-300' : 'text-slate-600';
+  const border = darkMode ? 'border-slate-800' : 'border-slate-200';
+  const cardBg = darkMode ? 'bg-slate-900/60' : 'bg-white';
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div 
-              key={index}
-              className={`group ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-2xl shadow-lg 
-                hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 overflow-hidden`}
+  return (
+    <section
+      id="projects"
+      className={`py-24 ${darkMode ? 'bg-slate-900/50' : 'bg-white'}`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <p className="text-sm font-mono font-medium text-indigo-500 mb-3">Projects</p>
+        <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight mb-4 ${base}`}>
+          Featured Work
+        </h2>
+        <p className={`text-sm mb-12 ${muted}`}>
+          A selection of projects built independently or during internships.
+        </p>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <div
+              key={project.id}
+              className={`flex flex-col p-6 rounded-xl border ${border} ${cardBg} hover:border-indigo-500/30 transition-colors duration-200`}
             >
-              {/* Project Image */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                    darkMode ? 'bg-gray-800/80 text-white' : 'bg-white/80 text-gray-800'
-                  }`}>
-                    {project.category}
-                  </span>
+              {/* Title row */}
+              <div className="flex items-center gap-2.5 mb-3">
+                <div className={`p-2 rounded-lg border ${border}`}>
+                  {project.icon}
                 </div>
+                <h3 className={`text-sm font-semibold ${base}`}>{project.title}</h3>
               </div>
 
-              {/* Project Content */}
-              <div className="p-6">
-                <div className="flex items-center mb-3">
-                  {project.icon}
-                  <h3 className={`text-xl font-bold ml-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    {project.title}
-                  </h3>
-                </div>
+              {/* One-line description */}
+              <p className={`text-sm leading-relaxed mb-4 ${subtle}`}>{project.description}</p>
 
-                <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-4 leading-relaxed`}>
-                  {project.description}
-                </p>
+              {/* Highlights */}
+              <ul className={`space-y-1.5 mb-5 flex-1`}>
+                {project.highlights.map((h, i) => (
+                  <li key={i} className={`flex items-start gap-2 text-xs ${muted}`}>
+                    <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-indigo-500/60" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
 
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex}
-                      className={`px-3 py-1 text-sm rounded-full ${
-                        darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'
-                      }`}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Project Links */}
-                <div className="flex gap-4">
-                  <a 
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors ${
-                      darkMode 
-                        ? 'border-gray-700 text-gray-300 hover:bg-gray-800' 
-                        : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
+              {/* Tech stack */}
+              <div className="flex flex-wrap gap-1.5 mb-5 pt-4 border-t border-slate-200 dark:border-slate-800">
+                {project.tech.map((t) => (
+                  <span
+                    key={t}
+                    className={`px-2 py-0.5 rounded text-xs font-mono border ${border} ${muted}`}
                   >
-                    <Github size={16} />
-                    Code
-                  </a>
-                  <a 
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center gap-2">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border ${border} ${muted} hover:text-indigo-500 hover:border-indigo-500/40 transition-colors duration-150`}
+                >
+                  <Github size={13} />
+                  GitHub
+                </a>
+                {project.live && (
+                  <a
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg 
-                      hover:bg-blue-700 transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white transition-colors duration-150"
                   >
-                    <ExternalLink size={16} />
+                    <ExternalLink size={13} />
                     Live Demo
                   </a>
-                </div>
+                )}
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
