@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Code2, Download, ExternalLink, Check, Copy, Sparkles, MessageSquare } from 'lucide-react';
+import { ENDPOINTS } from '../config';
 
 interface ContactProps {
   darkMode: boolean;
@@ -98,7 +99,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
     setErrorMessage('');
   
     try {
-      const response = await fetch("https://portfolio-backend-7ztq.onrender.com/send-message", {
+      const response = await fetch(ENDPOINTS.contact, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -146,7 +147,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
 
   const downloadResume = () => {
     const link = document.createElement('a');
-    link.href = "https://drive.google.com/file/d/1zyJa3iAcgS1YOUpPW0l8WMTdG-WKpZSK/view?usp=sharing";
+    link.href = "https://drive.google.com/file/d/1FMSIt8EJnDTBjnRRKS6xvKZbJvI5eypv/view?usp=sharing";
     link.target = "_blank";
     link.download = 'Navaneeth_Krishna_G_Resume.pdf';
     link.click();
@@ -274,7 +275,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                     <Linkedin size={16} /> LinkedIn
                   </a>
                   <a
-                    href="https://leetcode.com/u/Navaneeth832/"
+                    href="https://leetcode.com/u/ZppmnjPjbA/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all ${
@@ -289,7 +290,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
               {/* Resume Buttons */}
               <div className="mt-8 space-y-3">
                 <a
-                  href="https://drive.google.com/file/d/1zyJa3iAcgS1YOUpPW0l8WMTdG-WKpZSK/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1FMSIt8EJnDTBjnRRKS6xvKZbJvI5eypv/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-md shadow-indigo-600/30 transition-all"

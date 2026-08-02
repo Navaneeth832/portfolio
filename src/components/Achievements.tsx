@@ -15,7 +15,7 @@ const Achievements: React.FC<AchievementsProps> = ({ darkMode }) => {
     },
     {
       title: 'LeetCode',
-      detail: '150+ Solved',
+      detail: '250+ Solved',
       desc: 'Covers arrays, DP, trees, graphs, and binary search.',
       icon: <Award size={16} className="text-indigo-500" />,
     },
@@ -39,6 +39,7 @@ const Achievements: React.FC<AchievementsProps> = ({ darkMode }) => {
 
   const base = darkMode ? 'text-slate-100' : 'text-slate-900';
   const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const subtle = darkMode ? 'text-slate-300' : 'text-slate-600';
   const border = darkMode ? 'border-slate-800' : 'border-slate-200';
   const cardBg = darkMode ? 'bg-slate-900/60' : 'bg-white';

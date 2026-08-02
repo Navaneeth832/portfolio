@@ -79,7 +79,7 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
               <ArrowRight size={15} />
             </button>
             <a
-              href="https://drive.google.com/file/d/1zyJa3iAcgS1YOUpPW0l8WMTdG-WKpZSK/view?usp=sharing"
+              href="https://drive.google.com/file/d/1FMSIt8EJnDTBjnRRKS6xvKZbJvI5eypv/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-colors duration-150 ${

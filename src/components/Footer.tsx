@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               <Linkedin size={16} />
             </a>
             <a
-              href="https://leetcode.com/u/Navaneeth832/"
+              href="https://leetcode.com/u/ZppmnjPjbA/"
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-md ${hover} transition-colors`}

@@ -60,7 +60,7 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
           {/* Left: Personal summary */}
           <div className="space-y-6">
             <p className={`text-base leading-relaxed ${subtle}`}>
-              I'm a third-year Computer Science student at{' '}
+              I'm a final year Computer Science student at{' '}
               <span className={`font-medium ${base}`}>College of Engineering, Trivandrum</span>. I enjoy building
               full-stack applications, working with backend APIs, and exploring how large language models can
               be integrated into real-world software.
@@ -71,7 +71,7 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
               distributed systems and database design.
             </p>
             <p className={`text-base leading-relaxed ${subtle}`}>
-              Outside of academics and internships, I enjoy competitive programming and have solved 150+ problems
+              Outside of academics and internships, I enjoy competitive programming and have solved 250+ problems
               on LeetCode. I appeared for GATE CS 2026, achieving an AIR of 4391.
             </p>
 

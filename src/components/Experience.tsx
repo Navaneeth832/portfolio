@@ -10,7 +10,7 @@ const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
     {
       title: 'Full Stack Developer, Intern',
       company: 'SATCARD – IIT Palakkad',
-      period: 'May 2026 – Present',
+      period: 'June 2026 – Present',
       location: 'IIT Palakkad, Kerala',
       isCurrent: true,
       points: [
@@ -50,7 +50,7 @@ const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
 
         <p className="text-sm font-mono font-medium text-indigo-500 mb-3">Experience</p>
         <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight mb-12 ${base}`}>
-          Work History
+          Internships
         </h2>
 
         <div className="max-w-3xl space-y-8">

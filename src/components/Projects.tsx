@@ -33,7 +33,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
         'Built with Google Cloud ADK and Vertex AI Agent Runtime',
       ],
       tech: ['Python', 'Gemini 2.5', 'MCP', 'MongoDB', 'Elasticsearch', 'React'],
-      github: 'https://github.com/Navaneeth832',
+      github: 'https://github.com/Navaneeth832/Omnichannel-Anti-Fraud-Agent',
       live: null,
       icon: <ShieldAlert size={18} className="text-emerald-500" />,
     },
@@ -48,7 +48,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
         'Automated hospital routing based on incident location and severity',
       ],
       tech: ['Kotlin', 'TensorFlow Lite', 'React', 'Firebase', 'Python', 'Google Maps API'],
-      github: 'https://github.com/Navaneeth832',
+      github: 'https://github.com/tve23cs139-creator/Crash-Detection',
       live: null,
       icon: <Activity size={18} className="text-pink-500" />,
     },
@@ -72,7 +72,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
           Featured Work
         </h2>
         <p className={`text-sm mb-12 ${muted}`}>
-          A selection of projects built independently or during internships.
+          A selection of projects built.
         </p>
 
         <div className="grid lg:grid-cols-3 gap-6">

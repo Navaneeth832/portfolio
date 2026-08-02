@@ -1,213 +1,231 @@
-import React from 'react';
-import { Code2, Trophy, Award, Flame, ExternalLink, CheckCircle, Target, Zap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ExternalLink, RefreshCw, Code2 } from 'lucide-react';
+import { ENDPOINTS } from '../config';
 
 interface LeetCodeStatsProps {
   darkMode: boolean;
 }
 
+interface LeetCodeData {
+  username: string;
+  ranking: number;
+  solved: { total: number; easy: number; medium: number; hard: number };
+  acceptanceRate: string;
+  contest: {
+    attended: number;
+    rating: number;
+    globalRank: number;
+    topPercentage: string;
+  } | null;
+  topTags: Array<{ tagName: string; problemsSolved: number }>;
+}
+
+// Hardcoded fallback shown when backend is unreachable
+const FALLBACK: LeetCodeData = {
+  username: 'Navaneeth832',
+  ranking: 0,
+  solved: { total: 150, easy: 75, medium: 62, hard: 13 },
+  acceptanceRate: '68.4%',
+  contest: null,
+  topTags: [
+    { tagName: 'Array', problemsSolved: 40 },
+    { tagName: 'Dynamic Programming', problemsSolved: 25 },
+    { tagName: 'Tree', problemsSolved: 20 },
+    { tagName: 'Binary Search', problemsSolved: 18 },
+    { tagName: 'Graph', problemsSolved: 15 },
+    { tagName: 'Two Pointers', problemsSolved: 14 },
+    { tagName: 'Sliding Window', problemsSolved: 10 },
+    { tagName: 'Stack', problemsSolved: 9 },
+  ],
+};
+
 const LeetCodeStats: React.FC<LeetCodeStatsProps> = ({ darkMode }) => {
-  const stats = {
-    username: "Navaneeth832",
-    totalSolved: 150,
-    easySolved: 75,
-    mediumSolved: 62,
-    hardSolved: 13,
-    acceptanceRate: "68.4%",
-    gfgRank: "Top 30",
-    gateRank: "AIR 4391"
+  const [data, setData] = useState<LeetCodeData>(FALLBACK);
+  const [loading, setLoading] = useState(true);
+  const [isLive, setIsLive] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchStats = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(ENDPOINTS.leetcode);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      setData(json);
+      setIsLive(true);
+    } catch (err: any) {
+      console.warn('[LeetCodeStats] Backend unreachable, using fallback:', err.message);
+      setError(err.message);
+      setIsLive(false);
+      setData(FALLBACK);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const dsaPatterns = [
-    "Arrays & Hashing", "Two Pointers", "Sliding Window", "Stack & Queue",
-    "Binary Search", "Trees & Graphs", "Dynamic Programming", "Heap / Priority Queue"
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const base = darkMode ? 'text-slate-100' : 'text-slate-900';
+  const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
+  const border = darkMode ? 'border-slate-800' : 'border-slate-200';
+  const cardBg = darkMode ? 'bg-slate-900/60' : 'bg-white';
+
+  const totalForBar = data.solved.easy + data.solved.medium + data.solved.hard || 1;
+  const difficulties = [
+    { label: 'Easy', count: data.solved.easy, color: 'bg-emerald-500', text: 'text-emerald-500' },
+    { label: 'Medium', count: data.solved.medium, color: 'bg-amber-500', text: 'text-amber-500' },
+    { label: 'Hard', count: data.solved.hard, color: 'bg-red-500', text: 'text-red-500' },
   ];
 
   return (
-    <section className={`py-24 relative overflow-hidden ${
-      darkMode ? 'bg-slate-950 text-white' : 'bg-slate-100/70 text-slate-900'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="mb-12">
-          <p className="text-sm font-mono font-medium text-indigo-500 mb-3">Problem Solving</p>
-          <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight ${darkMode ? 'text-slate-100' : 'text-slate-900'}`}>
-            LeetCode & DSA
-          </h2>
+    <section
+      id="leetcode"
+      className={`py-24 ${darkMode ? 'bg-slate-950' : 'bg-slate-50'}`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <div className="flex items-center justify-between mb-12">
+          <div>
+            <p className="text-sm font-mono font-medium text-indigo-500 mb-2">Problem Solving</p>
+            <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight ${base}`}>
+              LeetCode & DSA
+            </h2>
+          </div>
+          <div className="flex items-center gap-3">
+            {!loading && (
+              <span className={`text-xs font-mono ${isLive ? 'text-emerald-500' : 'text-amber-500'}`}>
+                {isLive ? '● live' : '○ fallback'}
+              </span>
+            )}
+            <button
+              onClick={fetchStats}
+              disabled={loading}
+              className={`p-2 rounded-md ${muted} hover:text-indigo-500 transition-colors disabled:opacity-40`}
+              title="Refresh"
+              aria-label="Refresh LeetCode stats"
+            >
+              <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+            </button>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-          
-          {/* Main Solved Stats Card */}
-          <div className="lg:col-span-5 flex flex-col justify-between p-8 rounded-3xl border glass-card ${
-            darkMode ? 'bg-slate-900/80 border-slate-800' : 'bg-white/90 border-slate-200 shadow-sm'
-          }">
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-amber-500/10 text-amber-500 border border-amber-500/20">
-                    <Code2 size={24} />
-                  </div>
-                  <div>
-                    <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                      LeetCode Profile
-                    </h3>
-                    <a
-                      href="https://leetcode.com/u/Navaneeth832/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono text-indigo-500 hover:underline"
-                    >
-                      @{stats.username}
-                    </a>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20 flex items-center gap-1">
-                  <Flame size={14} /> 150+ Solved
-                </span>
-              </div>
+        {error && !isLive && (
+          <div className={`mb-8 p-4 rounded-lg border ${border} text-xs ${muted} font-mono`}>
+            <span className="text-amber-500 font-semibold">Backend offline</span> — showing hardcoded stats. Start the backend to fetch live data.
+          </div>
+        )}
 
-              {/* Total Solved Ring / Summary */}
-              <div className="p-6 rounded-2xl bg-slate-100/50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 mb-6 text-center">
-                <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block mb-1">Total Solved Problems</span>
-                <span className={`text-5xl font-black font-mono tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                  {stats.totalSolved}+
-                </span>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium">
-                  Focused on core Data Structures & Algorithms patterns
-                </p>
-              </div>
+        <div className="grid lg:grid-cols-3 gap-6">
 
-              {/* Difficulty Breakdown Bars */}
-              <div className="space-y-4">
-                {/* Easy */}
-                <div>
-                  <div className="flex justify-between text-xs font-semibold mb-1">
-                    <span className="text-emerald-500">Easy ({stats.easySolved})</span>
-                    <span className="font-mono text-slate-400">50%</span>
-                  </div>
-                  <div className="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                    <div className="h-full bg-emerald-500 rounded-full" style={{ width: '50%' }} />
-                  </div>
-                </div>
-
-                {/* Medium */}
-                <div>
-                  <div className="flex justify-between text-xs font-semibold mb-1">
-                    <span className="text-amber-500">Medium ({stats.mediumSolved})</span>
-                    <span className="font-mono text-slate-400">41%</span>
-                  </div>
-                  <div className="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                    <div className="h-full bg-amber-500 rounded-full" style={{ width: '41%' }} />
-                  </div>
-                </div>
-
-                {/* Hard */}
-                <div>
-                  <div className="flex justify-between text-xs font-semibold mb-1">
-                    <span className="text-rose-500">Hard ({stats.hardSolved})</span>
-                    <span className="font-mono text-slate-400">9%</span>
-                  </div>
-                  <div className="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                    <div className="h-full bg-rose-500 rounded-full" style={{ width: '9%' }} />
-                  </div>
-                </div>
-              </div>
+          {/* Solved Count Card */}
+          <div className={`p-6 rounded-xl border ${border} ${cardBg}`}>
+            <div className={`flex items-center gap-2 text-xs font-medium mb-5 ${muted}`}>
+              <Code2 size={14} />
+              Problems Solved
             </div>
 
-            <div className="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800">
-              <a
-                href="https://leetcode.com/u/Navaneeth832/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs text-center transition-all flex items-center justify-center gap-2 shadow-md shadow-amber-600/20"
-              >
-                <ExternalLink size={16} />
-                <span>Visit LeetCode Profile</span>
-              </a>
+            {/* Big number */}
+            <div className="mb-6">
+              <span className={`text-5xl font-bold font-mono ${base}`}>
+                {loading ? '···' : data.solved.total}
+              </span>
+              <span className={`text-sm ml-2 ${muted}`}>solved</span>
             </div>
+
+            {/* Difficulty breakdown */}
+            <div className="space-y-3">
+              {difficulties.map((d) => (
+                <div key={d.label}>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className={d.text}>{d.label}</span>
+                    <span className={`font-mono ${muted}`}>{d.count}</span>
+                  </div>
+                  <div className={`w-full h-1.5 rounded-full ${darkMode ? 'bg-slate-800' : 'bg-slate-100'}`}>
+                    <div
+                      className={`h-full rounded-full ${d.color} transition-all duration-500`}
+                      style={{ width: `${(d.count / totalForBar) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Acceptance rate */}
+            <div className={`mt-5 pt-4 border-t ${border} flex justify-between text-xs ${muted}`}>
+              <span>Acceptance rate</span>
+              <span className="font-mono">{data.acceptanceRate}</span>
+            </div>
+
+            <a
+              href="https://leetcode.com/u/Navaneeth832/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-4 flex items-center justify-center gap-2 w-full py-2 rounded-lg text-xs font-medium border ${border} ${muted} hover:text-indigo-500 hover:border-indigo-500/40 transition-colors`}
+            >
+              <ExternalLink size={13} /> View Profile
+            </a>
           </div>
 
-          {/* Competitive Ranks & DSA Topics */}
-          <div className="lg:col-span-7 space-y-6 flex flex-col justify-between">
-            
-            {/* National & Platform Achievements Grid */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              
-              {/* GATE CS 2026 */}
-              <div className={`p-6 rounded-3xl border glass-card ${
-                darkMode ? 'bg-indigo-950/30 border-indigo-500/30' : 'bg-indigo-50/80 border-indigo-200'
-              }`}>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2.5 rounded-xl bg-indigo-600 text-white">
-                    <Award size={20} />
-                  </div>
-                  <div>
-                    <h4 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                      GATE CS 2026
-                    </h4>
-                    <span className="text-xs text-indigo-500 font-medium">Graduate Aptitude Test</span>
-                  </div>
-                </div>
-                <div className="text-3xl font-black font-mono text-indigo-600 dark:text-indigo-400 mt-2">
-                  AIR 4391
-                </div>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
-                  All India Rank achieved in Computer Science & Engineering.
-                </p>
-              </div>
+          {/* Right panel */}
+          <div className="lg:col-span-2 space-y-5">
 
-              {/* GeeksforGeeks Rank */}
-              <div className={`p-6 rounded-3xl border glass-card ${
-                darkMode ? 'bg-emerald-950/30 border-emerald-500/30' : 'bg-emerald-50/80 border-emerald-200'
-              }`}>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2.5 rounded-xl bg-emerald-600 text-white">
-                    <Trophy size={20} />
-                  </div>
-                  <div>
-                    <h4 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                      GeeksforGeeks
-                    </h4>
-                    <span className="text-xs text-emerald-500 font-medium">University Leaderboard</span>
-                  </div>
+            {/* Extra stats row */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {[
+                { label: 'GATE CS 2026', value: 'AIR 4391', color: 'text-amber-500' },
+                { label: 'GFG Rank', value: 'Top 30', color: 'text-emerald-500' },
+                { label: data.ranking ? 'LC Global Rank' : 'Platform', value: data.ranking ? `#${data.ranking.toLocaleString()}` : 'LeetCode', color: 'text-indigo-500' },
+              ].map((stat) => (
+                <div key={stat.label} className={`p-4 rounded-xl border ${border} ${cardBg}`}>
+                  <p className={`text-lg font-bold font-mono ${stat.color}`}>{stat.value}</p>
+                  <p className={`text-xs mt-0.5 ${muted}`}>{stat.label}</p>
                 </div>
-                <div className="text-3xl font-black font-mono text-emerald-600 dark:text-emerald-400 mt-2">
-                  Top 30 Rank
-                </div>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
-                  Ranked in Top 30 for university problem-solving consistency.
-                </p>
-              </div>
-
+              ))}
             </div>
 
-            {/* Key DSA Patterns Practiced */}
-            <div className={`p-7 rounded-3xl border glass-card ${
-              darkMode ? 'bg-slate-900/80 border-slate-800' : 'bg-white/90 border-slate-200 shadow-sm'
-            }`}>
-              <h4 className="text-sm font-bold mb-4 flex items-center gap-2 text-indigo-500">
-                <Target size={16} /> Key Data Structure & Algorithm Patterns
-              </h4>
+            {/* Contest stats (only if live and available) */}
+            {isLive && data.contest && (
+              <div className={`p-5 rounded-xl border ${border} ${cardBg}`}>
+                <p className={`text-xs font-semibold uppercase tracking-wider mb-4 ${muted}`}>Contest Stats</p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {[
+                    { label: 'Rating', value: data.contest.rating },
+                    { label: 'Global Rank', value: `#${data.contest.globalRank?.toLocaleString()}` },
+                    { label: 'Contests', value: data.contest.attended },
+                    { label: 'Top %', value: `${data.contest.topPercentage}%` },
+                  ].map((s) => (
+                    <div key={s.label}>
+                      <p className={`text-base font-bold font-mono ${base}`}>{s.value}</p>
+                      <p className={`text-xs ${muted}`}>{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* DSA Topics */}
+            <div className={`p-5 rounded-xl border ${border} ${cardBg}`}>
+              <p className={`text-xs font-semibold uppercase tracking-wider mb-4 ${muted}`}>
+                Top Topics {isLive ? '(live)' : '(estimated)'}
+              </p>
               <div className="flex flex-wrap gap-2">
-                {dsaPatterns.map((pattern, idx) => (
+                {data.topTags.map((tag) => (
                   <span
-                    key={idx}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold border flex items-center gap-1.5 ${
-                      darkMode
-                        ? 'bg-slate-800/80 border-slate-700 text-slate-200'
-                        : 'bg-slate-100 border-slate-200 text-slate-700'
-                    }`}
+                    key={tag.tagName}
+                    className={`px-2.5 py-1 rounded-md text-xs border ${border} ${muted} font-mono`}
                   >
-                    <CheckCircle size={12} className="text-emerald-500" />
-                    {pattern}
+                    {tag.tagName}
+                    <span className="ml-1.5 text-indigo-500">{tag.problemsSolved}</span>
                   </span>
                 ))}
               </div>
             </div>
 
           </div>
-
         </div>
 
       </div>
