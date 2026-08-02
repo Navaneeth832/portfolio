@@ -291,7 +291,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
               {/* Resume Buttons */}
               <div className="mt-8 space-y-3">
                 <a
-                  href="/resume.pdf"
+                  href="/portfolio/resume.pdf"
                   download="Navaneeth_Krishna_G_Resume.pdf"
                   className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-md shadow-indigo-600/30 transition-all"
                 >
