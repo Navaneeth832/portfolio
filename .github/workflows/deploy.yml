@@ -13,41 +13,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      # Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
+      # Install dependencies
       - name: Install Dependencies
         run: npm ci
 
-      - name: Generate LaTeX Source
+      # Generate resume.tex from portfolio data
+      - name: Generate Resume Source
         run: node scripts/build-resume.js
 
-      - name: Compile LaTeX PDF
+      # Compile resume.tex → resume.pdf
+      - name: Compile Resume PDF
         uses: xu-cheng/latex-action@v3
         with:
           root_file: resume.tex
 
-      - name: Move PDF to Public folder
+      # Make the PDF available to the frontend
+      - name: Copy Resume to Public Folder
         run: |
           mkdir -p public
-          mv resume.pdf public/resume.pdf
+          cp resume.pdf public/resume.pdf
 
-      - name: Upload PDF to Google Drive (Optional)
-        env:
-          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-          GOOGLE_DRIVE_FILE_ID: ${{ secrets.GOOGLE_DRIVE_FILE_ID }}
-        run: node scripts/build-resume.js
+      # Upload PDF as an artifact for debugging/download
+      - name: Upload Resume Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: public/resume.pdf
 
-      - name: Build Project
+      # Build the portfolio
+      - name: Build Portfolio
         run: npm run build
 
-      - name: Deploy to gh-pages
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
