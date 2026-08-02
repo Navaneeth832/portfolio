@@ -1,0 +1,68 @@
+name: Generate Resume
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "data/**"
+      - "scripts/build-resume.js"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: resume-generation
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Resume Source
+        run: node scripts/build-resume.js
+
+      - name: Compile Resume PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume.tex
+
+      - name: Copy Resume to Public Folder
+        run: |
+          mkdir -p public
+          cp resume.pdf public/resume.pdf
+
+      - name: Upload Resume Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: public/resume.pdf
+
+      - name: Commit Updated Resume
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add public/resume.pdf
+
+          if git diff --cached --quiet; then
+            echo "No resume changes detected."
+          else
+            git commit -m "chore: auto-update generated resume [skip ci]"
+            git push
+          fi

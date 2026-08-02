@@ -79,8 +79,9 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
               <ArrowRight size={15} />
             </button>
             <a
-              href="/resume.pdf"
-              download="Navaneeth_Krishna_G_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-colors duration-150 ${
                 darkMode
                   ? `${border} text-slate-300 hover:bg-slate-800 hover:text-white`
