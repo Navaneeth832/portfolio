@@ -1,5 +1,3 @@
-name: Deploy Portfolio
-
 on:
   push:
     branches:
@@ -8,32 +6,54 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: deploy-pages
-  cancel-in-progress: true
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
+      # Install dependencies
       - name: Install Dependencies
         run: npm ci
 
+      # Generate resume.tex from portfolio data
+      - name: Generate Resume Source
+        run: node scripts/build-resume.js
+
+      # Compile resume.tex → resume.pdf
+      - name: Compile Resume PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume.tex
+
+      # Make the PDF available to the frontend
+      - name: Copy Resume to Public Folder
+        run: |
+          mkdir -p public
+          cp resume.pdf public/resume.pdf
+
+      # Upload PDF as an artifact for debugging/download
+      - name: Upload Resume Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: public/resume.pdf
+
+      # Build the portfolio
       - name: Build Portfolio
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
         run: npm run build
 
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
