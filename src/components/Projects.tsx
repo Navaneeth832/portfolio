@@ -1,59 +1,25 @@
 import React from 'react';
 import { ExternalLink, Github, FileCode, ShieldAlert, Activity } from 'lucide-react';
+import resumeData from '../data/resume.json';
 
 interface ProjectsProps {
   darkMode: boolean;
 }
 
-const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
-  const projects = [
-    {
-      id: 'lab-record-studio',
-      title: 'Lab Record Studio',
-      description: 'AI tool that generates formatted lab records from PDFs, code snippets, or plain-text prompts.',
-      highlights: [
-        'Supports 3 input types and 2 LaTeX templates',
-        'Produces complete lab records in ~15 seconds',
-        'Exports PDF preview and Overleaf-compatible ZIP',
-        'Deployed on Render with a Next.js + FastAPI stack',
-      ],
-      tech: ['Next.js', 'FastAPI', 'Python', 'Gemini API', 'LaTeX'],
-      github: 'https://github.com/Navaneeth832/record_latex_generator',
-      live: 'https://record-latex-generator.onrender.com',
-      icon: <FileCode size={18} className="text-indigo-500" />,
-    },
-    {
-      id: 'sentinel-guard',
-      title: 'SentinelGuard AI',
-      description: 'Multi-modal fraud detection agent that analyzes text, audio, images, and documents.',
-      highlights: [
-        'Uses Gemini 2.5 reasoning + MCP servers for domain validation',
-        'Threat scoring triggers automated SMS/email alerts via Twilio & SendGrid',
-        'Dual-layer verification: LLM behavioral analysis + deterministic DB checks',
-        'Built with Google Cloud ADK and Vertex AI Agent Runtime',
-      ],
-      tech: ['Python', 'Gemini 2.5', 'MCP', 'MongoDB', 'Elasticsearch', 'React'],
-      github: 'https://github.com/Navaneeth832/Omnichannel-Anti-Fraud-Agent',
-      live: null,
-      icon: <ShieldAlert size={18} className="text-emerald-500" />,
-    },
-    {
-      id: 'crash-detection-soc',
-      title: 'Crash Detection & SOC Dispatch',
-      description: 'Android app that detects vehicle crashes using on-device ML and notifies an operations dashboard.',
-      highlights: [
-        'Background sensor fusion (accelerometer + gyroscope) for high-G impact detection',
-        '1D CNN model via TensorFlow Lite, 3 risk tiers, 300 ms confirmation window',
-        'Real-time React SOC dashboard with Firebase and Google Maps routing',
-        'Automated hospital routing based on incident location and severity',
-      ],
-      tech: ['Kotlin', 'TensorFlow Lite', 'React', 'Firebase', 'Python', 'Google Maps API'],
-      github: 'https://github.com/tve23cs139-creator/Crash-Detection',
-      live: null,
-      icon: <Activity size={18} className="text-pink-500" />,
-    },
-  ];
+const getProjectIcon = (id: string) => {
+  switch (id) {
+    case 'lab-record-studio':
+      return <FileCode size={18} className="text-indigo-500" />;
+    case 'sentinel-guard-ai':
+      return <ShieldAlert size={18} className="text-emerald-500" />;
+    case 'crash-detection-soc':
+      return <Activity size={18} className="text-pink-500" />;
+    default:
+      return <FileCode size={18} className="text-indigo-500" />;
+  }
+};
 
+const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
   const base = darkMode ? 'text-slate-100' : 'text-slate-900';
   const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
   const subtle = darkMode ? 'text-slate-300' : 'text-slate-600';
@@ -76,7 +42,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
         </p>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
+          {resumeData.projects.map((project) => (
             <div
               key={project.id}
               className={`flex flex-col p-6 rounded-xl border ${border} ${cardBg} hover:border-indigo-500/30 transition-colors duration-200`}
@@ -84,7 +50,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
               {/* Title row */}
               <div className="flex items-center gap-2.5 mb-3">
                 <div className={`p-2 rounded-lg border ${border}`}>
-                  {project.icon}
+                  {getProjectIcon(project.id)}
                 </div>
                 <h3 className={`text-sm font-semibold ${base}`}>{project.title}</h3>
               </div>

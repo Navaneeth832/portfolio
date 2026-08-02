@@ -1,0 +1,178 @@
+{
+  "personal": {
+    "name": "NAVANEETH KRISHNA G",
+    "title": "Software Developer",
+    "email": "mittunavan@gmail.com",
+    "phone": "+91 95621 53025",
+    "location": "19th mile Ottapalam Palakkad Kerala, 679103, India",
+    "shortLocation": "Trivandrum, Kerala",
+    "github": "https://github.com/Navaneeth832",
+    "githubUsername": "github.com/Navaneeth832",
+    "linkedin": "https://www.linkedin.com/in/navaneeth-krishna-g-904477334",
+    "linkedinUsername": "linkedin.com/in/navaneeth-krishna-g-904477334",
+    "description": "Computer Science undergraduate interested in backend systems, AI applications, and full-stack development. Currently interning at SATCARD, IIT Palakkad, building an agricultural market analytics platform. I enjoy working on problems that sit at the intersection of software engineering and applied AI."
+  },
+  "profileSummary": "Computer Science student skilled in full-stack development, agentic workflows, and deploying ML-powered systems. Experienced in building scalable applications using Python, FastAPI, React, and Flutter. Strong in integrating LLMs (Gemini), Model Context Protocol (MCP) servers, API design, and problem-solving through competitive programming.",
+  "education": [
+    {
+      "degree": "Bachelor of Technology in Computer Science & Engineering",
+      "institution": "College of Engineering, Trivandrum (CET)",
+      "period": "Sep 2023 -- Jun 2027",
+      "shortPeriod": "2023 – 2027",
+      "score": "CGPA: 8.65",
+      "highlight": true
+    },
+    {
+      "degree": "CBSE Class 12",
+      "institution": "Lakshmi Narayana Vidhyanikethan",
+      "period": "May 2022 -- Mar 2023",
+      "shortPeriod": "2022 – 2023",
+      "score": "94.4%",
+      "highlight": false
+    },
+    {
+      "degree": "CBSE Class 10",
+      "institution": "Lakshmi Narayana Vidhyanikethan",
+      "period": "May 2020 -- May 2021",
+      "shortPeriod": "2020 – 2021",
+      "score": "94.6%",
+      "highlight": false
+    }
+  ],
+  "experience": [
+    {
+      "title": "Full Stack developer, Intern",
+      "company": "SATCARD, IIT Palakkad",
+      "period": "May 2026 -- Present",
+      "shortPeriod": "May 2026 – Present",
+      "location": "IIT Palakkad, Kerala",
+      "isCurrent": true,
+      "highlights": [
+        "Engineered a robust, full-stack agricultural market analytics platform using a FastAPI backend and Flutter frontend to track and visualize real-time commodity indices.",
+        "Architected dynamic multi-level filtering and interactive data visualization charts, utilizing Riverpod for decoupled state management and ensuring seamless UI state transitions.",
+        "Designed a highly scalable database layout integrating PostgreSQL and SQLAlchemy ORM for efficient handling of large-scale market data."
+      ],
+      "tech": ["FastAPI", "Flutter", "Riverpod", "PostgreSQL", "SQLAlchemy", "Python"]
+    },
+    {
+      "title": "Data Science Intern",
+      "company": "Proxenix",
+      "period": "Jun 2025 -- Jul 2025",
+      "shortPeriod": "Jun 2025 – Jul 2025",
+      "location": "Remote",
+      "isCurrent": false,
+      "highlights": [
+        "Collaborated in a team of 5 to build and deploy a movie review sentiment analysis web app achieving 90% accuracy using TF-IDF and Logistic Regression.",
+        "Developed the FastAPI backend for real-time inference and integrated a responsive UI using React."
+      ],
+      "tech": ["Python", "FastAPI", "React", "TF-IDF", "Logistic Regression", "Scikit-Learn"]
+    }
+  ],
+  "projects": [
+    {
+      "id": "sentinel-guard-ai",
+      "title": "Omnichannel Anti-Fraud Agent",
+      "description": "Multi-modal fraud detection agent that analyzes text, audio, images, and documents.",
+      "tech": ["Python", "Gemini 2.5", "MCP", "MongoDB", "React"],
+      "github": "https://github.com/Navaneeth832",
+      "live": null,
+      "type": "Hackathon Project",
+      "period": "Hackathon Project",
+      "highlights": [
+        "Developed a multimodal fraud detection system analyzing text, audio, images, and PDFs utilizing Google Cloud ADK and Vertex AI Agent Runtime.",
+        "Engineered a dual-layer verification pipeline by integrating Gemini's behavioral reasoning with MongoDB and Elasticsearch Model Context Protocol (MCP) servers for deterministic domain validation.",
+        "Implemented a threat scoring framework that triggers automated Twilio SMS and SendGrid email emergency alerts for high-risk cases (score >= 0.8)."
+      ]
+    },
+    {
+      "id": "crash-detection-soc",
+      "title": "Crash Detection & SOC Dispatch System",
+      "description": "Android app that detects vehicle crashes using on-device ML and notifies an operations dashboard.",
+      "tech": ["Kotlin", "React", "Firebase", "Python", "TensorFlow Lite"],
+      "github": "https://github.com/Navaneeth832",
+      "live": null,
+      "type": "Independent Project",
+      "period": "Independent Project",
+      "highlights": [
+        "Built an end-to-end emergency response system featuring a Kotlin Android app that utilizes background sensor fusion (accelerometer/gyroscope) to detect high-G impacts.",
+        "Trained and deployed a 1D CNN model via TensorFlow Lite for on-device crash severity prediction across 3 risk tiers with a 300ms confirmation window.",
+        "Developed a real-time React Security Operations Center (SOC) dashboard utilizing Firebase and Google Maps API for live incident tracking and intelligent hospital routing."
+      ]
+    },
+    {
+      "id": "lab-record-studio",
+      "title": "Lab Record Studio",
+      "description": "AI tool that generates formatted lab records from PDFs, code snippets, or plain-text prompts.",
+      "tech": ["Next.js", "FastAPI", "Python", "Gemini API", "LaTeX", "Render"],
+      "github": "https://github.com/Navaneeth832/record_latex_generator",
+      "live": "https://record-latex-generator.onrender.com",
+      "type": "Full-Stack AI Application",
+      "period": "Mar - Apr 2026",
+      "highlights": [
+        "Built and deployed an AI-powered full-stack application that transforms PDFs, code snippets, and natural-language prompts into structured laboratory experiments with editable LaTeX output.",
+        "Implemented an automated document pipeline supporting 3 input methods, 2 customizable LaTeX templates, PDF previews, template management, and Overleaf-compatible ZIP exports.",
+        "Designed a scalable FastAPI backend for asynchronous document processing and LLM-powered experiment generation, producing complete lab records in under 15 seconds and reducing manual documentation effort by approximately 80%."
+      ]
+    }
+  ],
+  "technicalSkills": {
+    "Languages": ["Python", "JavaScript", "TypeScript", "Dart", "C"],
+    "Backend & Frameworks": ["FastAPI", "Flask", "Node.js", "REST APIs"],
+    "Frontend & Mobile": ["React.js", "Flutter", "HTML", "CSS"],
+    "Databases & Cloud": ["PostgreSQL", "MySQL", "MongoDB", "Firebase", "Elasticsearch"],
+    "Tools & Technologies": ["Git", "Linux", "Model Context Protocol (MCP)"],
+    "AI/ML": ["TensorFlow Lite", "Scikit-learn", "Gemini API", "Agentic AI"]
+  },
+  "profilesAndAchievements": {
+    "gate": {
+      "title": "GATE CS 2026",
+      "detail": "AIR 4391",
+      "desc": "Achieved AIR 4391 in GATE CS 2026."
+    },
+    "leetcode": {
+      "title": "LeetCode",
+      "detail": "150+ Solved",
+      "desc": "Solved 150+ problems across key DSA patterns."
+    },
+    "gfg": {
+      "title": "GeeksforGeeks",
+      "detail": "Top 30",
+      "desc": "Ranked in the Top 30 in university rankings for problem-solving consistency."
+    }
+  },
+  "certificates": [
+    {
+      "title": "Certificate of Innovation",
+      "issuer": "Google Developers Group on Campus - ADGIPS"
+    },
+    {
+      "title": "Adobe Certificate of Participation",
+      "issuer": "Adobe"
+    },
+    {
+      "title": "Data Science and Analytics Internship",
+      "issuer": "Proxenix"
+    },
+    {
+      "title": "Agninirva AI Internship",
+      "issuer": "Agnirva Space Community"
+    },
+    {
+      "title": "Essential Mathematics for Machine Learning",
+      "issuer": "NPTEL"
+    },
+    {
+      "title": "Getting Started with Javascript",
+      "issuer": "Pupilfirst"
+    },
+    {
+      "title": "Getting Started with Google Gemini API",
+      "issuer": "Google DeepMind"
+    }
+  ],
+  "languages": [
+    { "name": "English", "level": "Full Professional" },
+    { "name": "Malayalam", "level": "Native/Bilingual" },
+    { "name": "Hindi", "level": "Limited Working" }
+  ]
+}

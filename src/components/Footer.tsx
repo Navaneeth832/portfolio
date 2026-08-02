@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, Linkedin, Mail, Code2, ArrowUp } from 'lucide-react';
+import resumeData from '../data/resume.json';
 
 interface FooterProps {
   darkMode: boolean;
@@ -24,17 +25,17 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
           {/* Brand */}
           <div className="flex items-center gap-3">
             <div className="w-7 h-7 rounded-md bg-indigo-600 flex items-center justify-center text-white text-xs font-bold">
-              N
+              {resumeData.personal.name.charAt(0)}
             </div>
             <span className={`text-sm font-medium ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-              Navaneeth Krishna G
+              {resumeData.personal.name}
             </span>
           </div>
 
           {/* Social links */}
           <div className={`flex items-center gap-1 ${muted}`}>
             <a
-              href="https://github.com/Navaneeth832"
+              href={resumeData.personal.github}
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-md ${hover} transition-colors`}
@@ -43,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               <Github size={16} />
             </a>
             <a
-              href="https://linkedin.com/in/navaneeth-krishna-g-904477334"
+              href={resumeData.personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-md ${hover} transition-colors`}
@@ -52,7 +53,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               <Linkedin size={16} />
             </a>
             <a
-              href="https://leetcode.com/u/ZppmnjPjbA/"
+              href={`https://leetcode.com/u/Navaneeth832/`}
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-md ${hover} transition-colors`}
@@ -61,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               <Code2 size={16} />
             </a>
             <a
-              href="mailto:mittunavan@gmail.com"
+              href={`mailto:${resumeData.personal.email}`}
               className={`p-2 rounded-md ${hover} transition-colors`}
               aria-label="Email"
             >
@@ -71,7 +72,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
 
           {/* Copyright + back to top */}
           <div className={`flex items-center gap-4 text-xs font-mono ${muted}`}>
-            <span>© {currentYear} Navaneeth Krishna G</span>
+            <span>© {currentYear} {resumeData.personal.name}</span>
             <button
               onClick={scrollToTop}
               className={`flex items-center gap-1 hover:text-indigo-500 transition-colors`}

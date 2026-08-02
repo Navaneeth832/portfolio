@@ -147,7 +147,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
 
   const downloadResume = () => {
     const link = document.createElement('a');
-    link.href = "https://drive.google.com/file/d/1FMSIt8EJnDTBjnRRKS6xvKZbJvI5eypv/view?usp=sharing";
+    link.href = "/resume.pdf";
     link.target = "_blank";
     link.download = 'Navaneeth_Krishna_G_Resume.pdf';
     link.click();
@@ -193,13 +193,13 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                     </div>
                     <div className="truncate">
                       <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">Email</span>
-                      <a href="mailto:mittunavan@gmail.com" className="text-sm font-semibold hover:text-indigo-500 transition-colors truncate block">
-                        mittunavan@gmail.com
+                      <a href={`mailto:${resumeData.personal.email}`} className="text-sm font-semibold hover:text-indigo-500 transition-colors truncate block">
+                        {resumeData.personal.email}
                       </a>
                     </div>
                   </div>
                   <button
-                    onClick={() => copyToClipboard('mittunavan@gmail.com', 'email')}
+                    onClick={() => copyToClipboard(resumeData.personal.email, 'email')}
                     className={`p-2 rounded-xl border text-xs transition-all ${
                       darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-slate-200 hover:bg-slate-100'
                     }`}
@@ -217,13 +217,13 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                     </div>
                     <div>
                       <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">Phone</span>
-                      <a href="tel:+919562153025" className="text-sm font-semibold hover:text-emerald-500 transition-colors block">
-                        +91 95621 53025
+                      <a href={`tel:${resumeData.personal.phone.replace(/\s+/g, '')}`} className="text-sm font-semibold hover:text-emerald-500 transition-colors block">
+                        {resumeData.personal.phone}
                       </a>
                     </div>
                   </div>
                   <button
-                    onClick={() => copyToClipboard('+91 95621 53025', 'phone')}
+                    onClick={() => copyToClipboard(resumeData.personal.phone, 'phone')}
                     className={`p-2 rounded-xl border text-xs transition-all ${
                       darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-slate-200 hover:bg-slate-100'
                     }`}
@@ -241,7 +241,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                   <div>
                     <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">Location</span>
                     <span className="text-sm font-semibold block">
-                      Ottapalam, Palakkad, Kerala, India
+                      {resumeData.personal.location}
                     </span>
                   </div>
                 </div>
@@ -255,7 +255,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                 </span>
                 <div className="flex gap-3">
                   <a
-                    href="https://github.com/Navaneeth832"
+                    href={resumeData.personal.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all ${
@@ -265,7 +265,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                     <Github size={16} /> GitHub
                   </a>
                   <a
-                    href="https://linkedin.com/in/navaneeth-krishna-g-904477334"
+                    href={resumeData.personal.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all ${
@@ -275,7 +275,7 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                     <Linkedin size={16} /> LinkedIn
                   </a>
                   <a
-                    href="https://leetcode.com/u/ZppmnjPjbA/"
+                    href={`https://leetcode.com/u/Navaneeth832/`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all ${
@@ -290,9 +290,8 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
               {/* Resume Buttons */}
               <div className="mt-8 space-y-3">
                 <a
-                  href="https://drive.google.com/file/d/1FMSIt8EJnDTBjnRRKS6xvKZbJvI5eypv/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/resume.pdf"
+                  download="Navaneeth_Krishna_G_Resume.pdf"
                   className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-md shadow-indigo-600/30 transition-all"
                 >
                   <Download size={18} />

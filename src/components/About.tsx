@@ -1,46 +1,21 @@
 import React from 'react';
 import { GraduationCap, Award, Languages } from 'lucide-react';
+import resumeData from '../data/resume.json';
 
 interface AboutProps {
   darkMode: boolean;
 }
 
 const About: React.FC<AboutProps> = ({ darkMode }) => {
-  const education = [
-    {
-      degree: 'B.Tech – Computer Science & Engineering',
-      institution: 'College of Engineering, Trivandrum (CET)',
-      period: '2023 – 2027',
-      score: 'CGPA 8.65',
-      highlight: true,
-    },
-    {
-      degree: 'CBSE Class 12',
-      institution: 'Lakshmi Narayana Vidhyanikethan',
-      period: '2022 – 2023',
-      score: '94.4%',
-      highlight: false,
-    },
-    {
-      degree: 'CBSE Class 10',
-      institution: 'Lakshmi Narayana Vidhyanikethan',
-      period: '2020 – 2021',
-      score: '94.6%',
-      highlight: false,
-    },
-  ];
-
-  const languages = [
-    { name: 'Malayalam', level: 'Native' },
-    { name: 'English', level: 'Professional' },
-    { name: 'Hindi', level: 'Working' },
-  ];
-
   const base = darkMode ? 'text-slate-100' : 'text-slate-900';
   const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
   const subtle = darkMode ? 'text-slate-300' : 'text-slate-600';
   const border = darkMode ? 'border-slate-800' : 'border-slate-200';
   const cardBg = darkMode ? 'bg-slate-900/60' : 'bg-white';
+
+  const cet = resumeData.education.find(e => e.institution.includes('Trivandrum')) || resumeData.education[0];
+  const leetcodeCount = resumeData.profilesAndAchievements.leetcode.detail;
+  const gateAir = resumeData.profilesAndAchievements.gate.detail;
 
   return (
     <section
@@ -60,19 +35,19 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
           {/* Left: Personal summary */}
           <div className="space-y-6">
             <p className={`text-base leading-relaxed ${subtle}`}>
-              I'm a final year Computer Science student at{' '}
-              <span className={`font-medium ${base}`}>College of Engineering, Trivandrum</span>. I enjoy building
+              I'm a student of {cet.degree.replace("Bachelor of Technology in ", "")} at{' '}
+              <span className={`font-medium ${base}`}>{cet.institution}</span>. I enjoy building
               full-stack applications, working with backend APIs, and exploring how large language models can
               be integrated into real-world software.
             </p>
             <p className={`text-base leading-relaxed ${subtle}`}>
-              My primary tools are Python, FastAPI, React, and Flutter. I've been working with the Gemini API
+              My primary languages include {resumeData.technicalSkills.Languages.join(', ')} and frameworks like {resumeData.technicalSkills['Backend & Frameworks'].slice(0, 3).join(', ')}. I've been working with the Gemini API
               and Model Context Protocol (MCP) for agentic workflows, and I'm actively improving my knowledge of
               distributed systems and database design.
             </p>
             <p className={`text-base leading-relaxed ${subtle}`}>
-              Outside of academics and internships, I enjoy competitive programming and have solved 250+ problems
-              on LeetCode. I appeared for GATE CS 2026, achieving an AIR of 4391.
+              Outside of academics and internships, I enjoy competitive programming and have solved {leetcodeCount}
+              problems on LeetCode. I appeared for GATE CS 2026, achieving an {resumeData.profilesAndAchievements.gate.title} of {gateAir}.
             </p>
 
             {/* Languages */}
@@ -82,7 +57,7 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
                 Languages
               </div>
               <div className="flex flex-wrap gap-2">
-                {languages.map((l) => (
+                {resumeData.languages.map((l) => (
                   <span
                     key={l.name}
                     className={`px-3 py-1 rounded-md text-xs border ${border} ${muted}`}
@@ -102,7 +77,7 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
               Education
             </div>
             <div className="space-y-4">
-              {education.map((edu, idx) => (
+              {resumeData.education.map((edu, idx) => (
                 <div
                   key={idx}
                   className={`p-5 rounded-xl border ${border} ${cardBg} ${
@@ -114,7 +89,7 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
                       <p className={`text-sm font-semibold ${base}`}>{edu.degree}</p>
                       <p className={`text-xs mt-0.5 ${muted}`}>{edu.institution}</p>
                     </div>
-                    <span className={`shrink-0 text-xs font-mono ${muted}`}>{edu.period}</span>
+                    <span className={`shrink-0 text-xs font-mono ${muted}`}>{edu.shortPeriod}</span>
                   </div>
                   <div className="mt-3">
                     <span className="inline-flex items-center gap-1 text-xs font-mono text-emerald-500">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Github, Linkedin } from 'lucide-react';
+import resumeData from '../data/resume.json';
 
 interface HeaderProps {
   darkMode: boolean;
@@ -76,10 +77,10 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold select-none ${
               darkMode ? 'bg-indigo-600' : 'bg-indigo-600'
             }`}>
-              N
+              {resumeData.personal.name.charAt(0)}
             </div>
             <span className={`text-base font-semibold tracking-tight ${baseText} group-hover:text-indigo-500 transition-colors duration-150`}>
-              Navaneeth Krishna G
+              {resumeData.personal.name}
             </span>
           </button>
 
@@ -106,7 +107,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-2">
             <a
-              href="https://github.com/Navaneeth832"
+              href={resumeData.personal.github}
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-md ${mutedText} ${hoverBg} transition-colors duration-150`}
@@ -115,7 +116,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               <Github size={17} />
             </a>
             <a
-              href="https://linkedin.com/in/navaneeth-krishna-g-904477334"
+              href={resumeData.personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-md ${mutedText} ${hoverBg} transition-colors duration-150`}
@@ -174,7 +175,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
               })}
               <div className={`mt-3 pt-3 border-t ${borderColor} flex gap-4`}>
                 <a
-                  href="https://github.com/Navaneeth832"
+                  href={resumeData.personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex items-center gap-2 text-sm ${mutedText} hover:text-indigo-500 transition-colors`}
@@ -182,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
                   <Github size={15} /> GitHub
                 </a>
                 <a
-                  href="https://linkedin.com/in/navaneeth-krishna-g-904477334"
+                  href={resumeData.personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex items-center gap-2 text-sm ${mutedText} hover:text-indigo-500 transition-colors`}

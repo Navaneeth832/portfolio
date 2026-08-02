@@ -1,37 +1,11 @@
 import React from 'react';
+import resumeData from '../data/resume.json';
 
 interface SkillsProps {
   darkMode: boolean;
 }
 
 const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
-  const categories = [
-    {
-      title: 'Languages',
-      items: ['Python', 'JavaScript', 'TypeScript', 'Dart', 'C'],
-    },
-    {
-      title: 'Backend',
-      items: ['FastAPI', 'Flask', 'Node.js', 'REST APIs'],
-    },
-    {
-      title: 'Frontend & Mobile',
-      items: ['React.js', 'Next.js', 'Flutter', 'HTML / CSS'],
-    },
-    {
-      title: 'Databases',
-      items: ['PostgreSQL', 'MongoDB', 'Firebase', 'Elasticsearch', 'MySQL'],
-    },
-    {
-      title: 'AI / ML',
-      items: ['Gemini API', 'MCP Servers', 'TensorFlow Lite', 'Scikit-Learn', 'Cloud ADK'],
-    },
-    {
-      title: 'Tools',
-      items: ['Git & GitHub', 'Linux', 'LaTeX', 'Render', 'SQLAlchemy ORM'],
-    },
-  ];
-
   const base = darkMode ? 'text-slate-100' : 'text-slate-900';
   const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
   const border = darkMode ? 'border-slate-800' : 'border-slate-200';
@@ -39,6 +13,11 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
   const chip = darkMode
     ? 'bg-slate-800 border-slate-700 text-slate-300'
     : 'bg-slate-50 border-slate-200 text-slate-700';
+
+  const skillCategories = Object.entries(resumeData.technicalSkills).map(([title, items]) => ({
+    title,
+    items
+  }));
 
   return (
     <section
@@ -53,7 +32,7 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
         </h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((cat) => (
+          {skillCategories.map((cat) => (
             <div
               key={cat.title}
               className={`p-5 rounded-xl border ${border} ${cardBg}`}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Download, MapPin } from 'lucide-react';
+import resumeData from '../data/resume.json';
 
 interface HeroProps {
   darkMode: boolean;
@@ -14,7 +15,12 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
     }
   };
 
-  const coreTech = ['Python', 'FastAPI', 'React', 'Flutter', 'Gemini API', 'PostgreSQL'];
+  // Get first 6 skills dynamically as core tech stack
+  const coreTech = [
+    ...resumeData.technicalSkills.Languages.slice(0, 2),
+    ...resumeData.technicalSkills["Backend & Frameworks"].slice(0, 2),
+    ...resumeData.technicalSkills["Frontend & Mobile"].slice(0, 2)
+  ].slice(0, 6);
 
   const base = darkMode ? 'text-slate-100' : 'text-slate-900';
   const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
@@ -45,28 +51,22 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
           {/* Location badge */}
           <div className={`inline-flex items-center gap-1.5 text-xs ${muted} mb-8`}>
             <MapPin size={13} />
-            <span>Trivandrum, Kerala · Open to opportunities</span>
+            <span>{resumeData.personal.shortLocation} · Open to opportunities</span>
           </div>
 
           {/* Name */}
           <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-3 ${base}`}>
-            Navaneeth Krishna G
+            {resumeData.personal.name}
           </h1>
 
           {/* Role */}
           <p className={`text-lg sm:text-xl font-medium mb-6 ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>
-            Software Developer · B.Tech CSE @ CET Trivandrum
+            {resumeData.personal.title} · {resumeData.education[0].degree.replace("Bachelor of Technology in ", "B.Tech ")} @ {resumeData.education[0].institution.replace("College of Engineering, Trivandrum ", "")}
           </p>
 
           {/* Description */}
           <p className={`text-base sm:text-lg leading-relaxed max-w-2xl mb-10 ${muted}`}>
-            Computer Science undergraduate interested in backend systems, AI applications, and full-stack
-            development. Currently interning at{' '}
-            <span className={`font-medium ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
-              SATCARD, IIT Palakkad
-            </span>
-            , building an agricultural market analytics platform. I enjoy working on problems that sit at
-            the intersection of software engineering and applied AI.
+            {resumeData.personal.description}
           </p>
 
           {/* CTA Buttons */}
@@ -79,9 +79,8 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
               <ArrowRight size={15} />
             </button>
             <a
-              href="https://drive.google.com/file/d/1FMSIt8EJnDTBjnRRKS6xvKZbJvI5eypv/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/resume.pdf"
+              download="Navaneeth_Krishna_G_Resume.pdf"
               className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-colors duration-150 ${
                 darkMode
                   ? `${border} text-slate-300 hover:bg-slate-800 hover:text-white`

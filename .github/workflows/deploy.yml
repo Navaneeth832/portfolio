@@ -25,6 +25,25 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Generate LaTeX Source
+        run: node scripts/build-resume.js
+
+      - name: Compile LaTeX PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume.tex
+
+      - name: Move PDF to Public folder
+        run: |
+          mkdir -p public
+          mv resume.pdf public/resume.pdf
+
+      - name: Upload PDF to Google Drive (Optional)
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          GOOGLE_DRIVE_FILE_ID: ${{ secrets.GOOGLE_DRIVE_FILE_ID }}
+        run: node scripts/build-resume.js
+
       - name: Build Project
         run: npm run build
 

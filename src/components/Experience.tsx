@@ -1,40 +1,12 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
+import resumeData from '../data/resume.json';
 
 interface ExperienceProps {
   darkMode: boolean;
 }
 
 const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
-  const experiences = [
-    {
-      title: 'Full Stack Developer, Intern',
-      company: 'SATCARD – IIT Palakkad',
-      period: 'June 2026 – Present',
-      location: 'IIT Palakkad, Kerala',
-      isCurrent: true,
-      points: [
-        'Building a full-stack agricultural market analytics platform with a FastAPI backend and Flutter frontend.',
-        'Implemented dynamic multi-level commodity filtering and interactive data visualizations using Riverpod for state management.',
-        'Designed PostgreSQL database schema with SQLAlchemy ORM to handle time-series market data efficiently.',
-      ],
-      tech: ['FastAPI', 'Flutter', 'Riverpod', 'PostgreSQL', 'SQLAlchemy', 'Python'],
-    },
-    {
-      title: 'Data Science Intern',
-      company: 'Proxenix',
-      period: 'Jun 2025 – Jul 2025',
-      location: 'Remote',
-      isCurrent: false,
-      points: [
-        'Collaborated in a team of 5 to build and deploy a movie review sentiment analysis web app achieving 90% accuracy.',
-        'Built the FastAPI inference backend and integrated a React frontend for real-time predictions.',
-        'Used TF-IDF vectorization and Logistic Regression (scikit-learn) for the classification model.',
-      ],
-      tech: ['Python', 'FastAPI', 'React', 'TF-IDF', 'Logistic Regression', 'Scikit-Learn'],
-    },
-  ];
-
   const base = darkMode ? 'text-slate-100' : 'text-slate-900';
   const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
   const subtle = darkMode ? 'text-slate-300' : 'text-slate-600';
@@ -50,11 +22,11 @@ const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
 
         <p className="text-sm font-mono font-medium text-indigo-500 mb-3">Experience</p>
         <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight mb-12 ${base}`}>
-          Internships
+          Work History
         </h2>
 
         <div className="max-w-3xl space-y-8">
-          {experiences.map((exp, idx) => (
+          {resumeData.experience.map((exp, idx) => (
             <div
               key={idx}
               className={`p-6 rounded-xl border ${border} ${cardBg}`}
@@ -75,13 +47,13 @@ const Experience: React.FC<ExperienceProps> = ({ darkMode }) => {
                       Current
                     </span>
                   )}
-                  <span className={`text-xs font-mono ${muted}`}>{exp.period}</span>
+                  <span className={`text-xs font-mono ${muted}`}>{exp.shortPeriod}</span>
                 </div>
               </div>
 
               {/* Impact points */}
               <ul className={`space-y-2 mb-5 text-sm ${subtle}`}>
-                {exp.points.map((pt, pIdx) => (
+                {exp.highlights.map((pt, pIdx) => (
                   <li key={pIdx} className="flex items-start gap-2">
                     <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-indigo-500" />
                     {pt}

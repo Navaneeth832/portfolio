@@ -1,48 +1,34 @@
 import React from 'react';
 import { Trophy, Award, Medal, CheckCircle2 } from 'lucide-react';
+import resumeData from '../data/resume.json';
 
 interface AchievementsProps {
   darkMode: boolean;
 }
 
+const getRankIcon = (key: string) => {
+  switch (key) {
+    case 'gate':
+      return <Trophy size={16} className="text-amber-500" />;
+    case 'leetcode':
+      return <Award size={16} className="text-indigo-500" />;
+    case 'gfg':
+      return <Medal size={16} className="text-emerald-500" />;
+    default:
+      return <Trophy size={16} className="text-amber-500" />;
+  }
+};
+
 const Achievements: React.FC<AchievementsProps> = ({ darkMode }) => {
-  const ranks = [
-    {
-      title: 'GATE CS 2026',
-      detail: 'AIR 4391',
-      desc: 'National-level graduate aptitude test for computer science.',
-      icon: <Trophy size={16} className="text-amber-500" />,
-    },
-    {
-      title: 'LeetCode',
-      detail: '250+ Solved',
-      desc: 'Covers arrays, DP, trees, graphs, and binary search.',
-      icon: <Award size={16} className="text-indigo-500" />,
-    },
-    {
-      title: 'GeeksforGeeks',
-      detail: 'Top 30 – University',
-      desc: 'Ranked in top 30 within university for problem-solving consistency.',
-      icon: <Medal size={16} className="text-emerald-500" />,
-    },
-  ];
-
-  const certificates = [
-    { title: 'Certificate of Innovation', issuer: 'Google Developers Group on Campus – ADGIPS' },
-    { title: 'Certificate of Participation', issuer: 'Adobe' },
-    { title: 'Data Science & Analytics Internship', issuer: 'Proxenix' },
-    { title: 'AI Internship Certificate', issuer: 'Agnirva Space Community' },
-    { title: 'Essential Mathematics for Machine Learning', issuer: 'NPTEL' },
-    { title: 'Getting Started with JavaScript', issuer: 'Pupilfirst' },
-    { title: 'Getting Started with Gemini API', issuer: 'Google DeepMind' },
-  ];
-
   const base = darkMode ? 'text-slate-100' : 'text-slate-900';
   const muted = darkMode ? 'text-slate-400' : 'text-slate-500';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const subtle = darkMode ? 'text-slate-300' : 'text-slate-600';
   const border = darkMode ? 'border-slate-800' : 'border-slate-200';
   const cardBg = darkMode ? 'bg-slate-900/60' : 'bg-white';
+
+  const ranks = Object.entries(resumeData.profilesAndAchievements).map(([key, info]) => ({
+    key,
+    ...info
+  }));
 
   return (
     <section
@@ -58,13 +44,13 @@ const Achievements: React.FC<AchievementsProps> = ({ darkMode }) => {
 
         {/* Competitive ranks */}
         <div className="grid sm:grid-cols-3 gap-5 mb-14">
-          {ranks.map((r, i) => (
+          {ranks.map((r) => (
             <div
-              key={i}
+              key={r.key}
               className={`p-5 rounded-xl border ${border} ${cardBg}`}
             >
               <div className="flex items-center gap-2 mb-3">
-                {r.icon}
+                {getRankIcon(r.key)}
                 <span className={`text-xs font-medium ${muted}`}>{r.title}</span>
               </div>
               <p className={`text-xl font-bold font-mono mb-1 ${base}`}>{r.detail}</p>
@@ -79,7 +65,7 @@ const Achievements: React.FC<AchievementsProps> = ({ darkMode }) => {
             Certificates
           </h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {certificates.map((cert, i) => (
+            {resumeData.certificates.map((cert, i) => (
               <div
                 key={i}
                 className={`flex items-start gap-3 p-4 rounded-xl border ${border} ${cardBg}`}
