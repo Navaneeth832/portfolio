@@ -296,6 +296,21 @@ ${languagesTex}
   }
 
   // Compile PDF
+  const args = process.argv.slice(2);
+  const skipCompile = args.includes('--no-compile') || process.env.CI === 'true';
+
+  if (skipCompile) {
+    console.log('ℹ️ Skipping host LaTeX compilation (running in CI or --no-compile specified).');
+    
+    // Check if we need to sync to Google Drive (usually done in GHA upload step after Docker compilation)
+    const fileId = process.env.GOOGLE_DRIVE_FILE_ID || '1FMSIt8EJnDTBjnRRKS6xvKZbJvI5eypv';
+    const credentials = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+    if (credentials && fs.existsSync(pdfOutputPath)) {
+      await uploadToGoogleDrive(pdfOutputPath, fileId, credentials);
+    }
+    return;
+  }
+
   try {
     console.log('🔄 Attempting compilation using pdflatex...');
     execSync(`pdflatex -interaction=nonstopmode -output-directory="${pdfOutputDir}" "${texOutputPath}"`, { stdio: 'ignore' });

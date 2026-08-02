@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Code2, Download, ExternalLink, Check, Copy, Sparkles, MessageSquare } from 'lucide-react';
 import { ENDPOINTS } from '../config';
+import resumeData from '../data/resume.json';
 
 interface ContactProps {
   darkMode: boolean;
