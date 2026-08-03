@@ -16,18 +16,6 @@ jobs:
       # Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      # Detect if resume source changed
-      - name: Detect Resume Changes
-        id: changes
-        uses: tj-actions/changed-files@v46
-        with:
-          files: |
-            data/**
-            resume/**
-            scripts/build-resume.js
 
       # Setup Node.js
       - name: Setup Node.js
@@ -40,46 +28,43 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      # Generate resume.tex from portfolio data
+      # Generate resume.tex from JSON
       - name: Generate Resume Source
-        if: steps.changes.outputs.any_changed == 'true'
         run: node scripts/build-resume.js
 
-      # Compile resume.tex → resume.pdf
+      # Compile LaTeX -> PDF
       - name: Compile Resume PDF
-        if: steps.changes.outputs.any_changed == 'true'
         uses: xu-cheng/latex-action@v3
         with:
           root_file: resume.tex
 
-      # Make the PDF available to the frontend
+      # Copy generated PDF into public/
       - name: Copy Resume to Public Folder
-        if: steps.changes.outputs.any_changed == 'true'
         run: |
           mkdir -p public
           cp resume.pdf public/resume.pdf
 
-      # Upload PDF as an artifact
+      # Upload PDF as artifact
       - name: Upload Resume Artifact
-        if: steps.changes.outputs.any_changed == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: resume-pdf
           path: public/resume.pdf
+
+      # Upload to Google Drive
       - name: Upload Resume to Google Drive
-        if: steps.changes.outputs.any_changed == 'true'
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           GOOGLE_DRIVE_FILE_ID: ${{ secrets.GOOGLE_DRIVE_FILE_ID }}
         run: node scripts/upload-drive.js
 
-      # Build the portfolio
+      # Build Portfolio
       - name: Build Portfolio
         env:
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
         run: npm run build
 
-      # Deploy to GitHub Pages
+      # Deploy GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
