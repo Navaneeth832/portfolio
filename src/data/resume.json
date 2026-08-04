@@ -5,12 +5,12 @@
     "email": "mittunavan@gmail.com",
     "phone": "+91 95621 53025",
     "location": "19th mile, Ottapalam, Palakkad, Kerala, 679103, India",
-    "shortLocation": "Trivandrum, Kerala",
+    "shortLocation": "Ottapalam, Kerala",
     "github": "https://github.com/Navaneeth832",
-    "githubUsername": "github.com/Navaneeth832",
+    "githubUsername": "Navaneeth832",
     "linkedin": "https://www.linkedin.com/in/navaneeth-krishna-g-904477334",
-    "linkedinUsername": "linkedin.com/in/navaneeth-krishna-g-904477334",
-    "description": "Computer Science undergraduate interested in backend systems, AI applications, and full-stack development. Currently interning at SATCARD, IIT Palakkad, building an agricultural market analytics platform. I enjoy working on problems that sit at the intersection of software engineering and applied AI."
+    "linkedinUsername": "navaneeth-krishna-g-904477334",
+    "description": "Computer Science and Engineering B.Tech undergraduate interested in backend systems, AI applications, and full-stack development. Currently interning at SATCARD, IIT Palakkad, building an agricultural market analytics platform. I enjoy working on problems that sit at the intersection of software engineering and applied AI."
   },
   "profileSummary": "Final year Computer Science and Engineering student skilled in full-stack development, agentic workflows, and deploying ML-powered systems. Experienced in building scalable applications using Python, FastAPI, React, and Flutter. Strong in integrating LLMs (Gemini), Model Context Protocol (MCP) servers, API design, and problem-solving through competitive programming.",
   "education": [
@@ -74,7 +74,7 @@
       "title": "Omnichannel Anti-Fraud Agent",
       "description": "Multi-modal fraud detection agent that analyzes text, audio, images, and documents.",
       "tech": ["Python", "Gemini 2.5", "MCP", "MongoDB", "React"],
-      "github": "https://github.com/Navaneeth832",
+      "github": "https://github.com/Navaneeth832/Omnichannel-Anti-Fraud-Agent",
       "live": null,
       "type": "Hackathon Project",
       "period": "Hackathon Project",
@@ -89,10 +89,10 @@
       "title": "Crash Detection & SOC Dispatch System",
       "description": "Android app that detects vehicle crashes using on-device ML and notifies an operations dashboard.",
       "tech": ["Kotlin", "React", "Firebase", "Python", "TensorFlow Lite"],
-      "github": "https://github.com/Navaneeth832",
+      "github": "https://github.com/tve23cs139-creator/Crash-Detection/tree/main",
       "live": null,
-      "type": "Independent Project",
-      "period": "Independent Project",
+      "type": "Mini Project",
+      "period": "Mini Project",
       "highlights": [
         "Built an end-to-end emergency response system featuring a Kotlin Android app that utilizes background sensor fusion (accelerometer/gyroscope) to detect high-G impacts.",
         "Trained and deployed a 1D CNN model via TensorFlow Lite for on-device crash severity prediction across 3 risk tiers with a 300ms confirmation window.",
@@ -131,8 +131,8 @@
     },
     "leetcode": {
       "title": "LeetCode",
-      "detail": "150+ Solved",
-      "desc": "Solved 150+ problems across key DSA patterns."
+      "detail": "250+ Solved",
+      "desc": "Solved 250+ problems across key DSA patterns."
     },
     "gfg": {
       "title": "GeeksforGeeks",
