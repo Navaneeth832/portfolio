@@ -7,7 +7,7 @@ Local Express.js backend for the portfolio website.
 | Method | Path | Description |
 |--------|------|-------------|
 | GET | `/health` | Health check |
-| POST | `/api/contact/send` | Send email via Gmail SMTP |
+| POST | `/api/contact/send` | Send email via Resend API |
 | GET | `/api/github/contributions` | Real GitHub contribution calendar via GraphQL |
 | GET | `/api/leetcode/stats` | Live LeetCode stats proxy (avoids CORS) |
 
@@ -27,11 +27,12 @@ cp .env.example .env
 ```
 Edit `.env` and fill in your values:
 
-#### Gmail App Password (for contact form emails)
-1. Enable 2-Factor Authentication on your Google account
-2. Go to: **Google Account → Security → App Passwords**
-3. Create an app password (select "Mail" + "Windows Computer")
-4. Paste the 16-character password into `GMAIL_APP_PASSWORD`
+#### Resend API (for contact form emails)
+1. Go to: **https://resend.com** and sign up.
+2. Generate an API key and paste it into `RESEND_API_KEY`.
+3. For testing, set `RESEND_FROM_EMAIL` to `onboarding@resend.dev`.
+4. In production, verify your custom domain on Resend and set `RESEND_FROM_EMAIL` to a verified address (e.g. `portfolio@yourdomain.com`).
+5. Set `RESEND_TO_EMAIL` to the email where you want to receive contact form messages.
 
 #### GitHub Personal Access Token (for contribution matrix)
 1. Go to: **github.com/settings/tokens → Generate new token (classic)**
