@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, Download, MapPin } from 'lucide-react';
 import resumeData from '../data/resume.json';
 
@@ -7,6 +7,51 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ darkMode }) => {
+  const [typedName, setTypedName] = useState('');
+  const [typedDescription, setTypedDescription] = useState('');
+  const [descriptionStarted, setDescriptionStarted] = useState(false);
+
+  useEffect(() => {
+    const name = resumeData.personal.name;
+    const description = resumeData.personal.description;
+    let nameIndex = 0;
+    let descriptionIndex = 0;
+    let descriptionTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    const nameTimer = setInterval(() => {
+      nameIndex += 1;
+      setTypedName(name.slice(0, nameIndex));
+
+      if (nameIndex >= name.length) {
+        clearInterval(nameTimer);
+        descriptionTimeout = setTimeout(() => setDescriptionStarted(true), 350);
+      }
+    }, 75);
+
+    return () => {
+      clearInterval(nameTimer);
+      if (descriptionTimeout) clearTimeout(descriptionTimeout);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!descriptionStarted) return;
+
+    const description = resumeData.personal.description;
+    let index = 0;
+
+    const descriptionTimer = setInterval(() => {
+      index += 1;
+      setTypedDescription(description.slice(0, index));
+
+      if (index >= description.length) {
+        clearInterval(descriptionTimer);
+      }
+    }, 18);
+
+    return () => clearInterval(descriptionTimer);
+  }, [descriptionStarted]);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -54,9 +99,15 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
             <span>{resumeData.personal.shortLocation} · Open to opportunities</span>
           </div>
 
-          {/* Name */}
+          {/* Name with typing animation */}
           <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-3 ${base}`}>
-            {resumeData.personal.name}
+            {typedName}
+            <span
+              aria-hidden="true"
+              className={`ml-1 inline-block w-[2px] h-[0.9em] align-[-0.05em] ${
+                darkMode ? 'bg-indigo-400' : 'bg-indigo-600'
+              } animate-pulse`}
+            />
           </h1>
 
           {/* Role */}
@@ -64,9 +115,17 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
             {resumeData.personal.title} · {resumeData.education[0].degree.replace("Bachelor of Technology in ", "B.Tech ")} @ {resumeData.education[0].institution.replace("College of Engineering, Trivandrum ", "")}
           </p>
 
-          {/* Description */}
+          {/* Description with typing animation */}
           <p className={`text-base sm:text-lg leading-relaxed max-w-2xl mb-10 ${muted}`}>
-            {resumeData.personal.description}
+            {typedDescription}
+            {descriptionStarted && typedDescription.length < resumeData.personal.description.length && (
+              <span
+                aria-hidden="true"
+                className={`ml-0.5 inline-block w-[2px] h-[1em] align-[-0.08em] ${
+                  darkMode ? 'bg-slate-400' : 'bg-slate-500'
+                } animate-pulse`}
+              />
+            )}
           </p>
 
           {/* CTA Buttons */}
