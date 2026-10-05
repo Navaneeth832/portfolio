@@ -17,8 +17,10 @@ app.use(cors({
     'http://localhost:4173',
     'http://127.0.0.1:5173',
     'https://navaneeth832.github.io',
+    'https://portfolio.navaneethcloud.dev',
   ],
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 // ── Health check ────────────────────────────────────────────────────────────
